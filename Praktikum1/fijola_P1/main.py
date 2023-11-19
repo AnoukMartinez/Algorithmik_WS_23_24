@@ -1,22 +1,33 @@
 import AutocompleteNgrams as AcNg
 import AVLTree as ATree
-
-x = AcNg.AutocompleteNgrams("csv/1_gram.csv")
-print(x.get("a"))
-
-# This is a sample Python script.
-
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from LinkedDictionary import LinkedDictionary
+from DirectAccessMap import DirectAccessMap
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Strg+8 to toggle the breakpoint.
+def print_all(dictionary):
+    for key, value in dictionary.items():
+        print(f"Key: {key}, Value: {value}")
 
 
-# Press the green button in the gutter to run the script.
+def linked_dict(filename: str):
+    my_dict = LinkedDictionary()
+    my_dict.put_from_csv(filename)
+
+    print(my_dict.get("eighty-four"))
+
+
+# print_all(my_dict.get_all())
+
+
+def direct_acc_map(filename: str):
+    my_dict = DirectAccessMap()
+    my_dict.put_from_csv(filename)
+
+    #  print(my_dict.get("eighty-four"))
+    print(my_dict.get_key("eighty-four"))
+    # print_all(my_dict.get_all())
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    linked_dict("csv/1_gram.csv")
+    direct_acc_map("csv/1_gram.csv")

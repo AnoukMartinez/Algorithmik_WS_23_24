@@ -1,6 +1,9 @@
 import csv
 import os
 
+# Eine Linked Hashmap die ich selbst implementiert habe.
+# Hat allerdings eine Laufzeit von O(n) aufgrund der while Schleife in get()
+
 class Node:
     def __init__(self, next, key, value):
         self.next = next
@@ -57,6 +60,6 @@ class LinkedHashTable:
         return None
 
 linkedHash = LinkedHashTable()
-linkedHash.read_csv_file("2_gram.csv")
+linkedHash.read_csv_file("1_gram.csv")
 print(linkedHash.get("dimwit"))
 print(linkedHash.get("midwit"))

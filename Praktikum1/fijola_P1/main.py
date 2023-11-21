@@ -30,17 +30,21 @@ def direct_acc_map(filename: str):
 
 def avl(filename: str):
     my_avl = AcNg.AutocompleteNgrams(filename)
-   # x.avl_tree.print_tree()
-    print("my_avl: height", my_avl.avl_tree.height())
+    # x.avl_tree.print_tree()
+    print("my_avl: height: ", my_avl.avl_tree.height())
 
     # csv 1
     # print("my_avl get", my_avl.get("eighty-four"))
     # csv 2
-    print("my_avl get", my_avl.get("and hungry"))
+    # print("my_avl get: ", my_avl.get("and hungry"))
+    # csv 3
+    # print("my_avl get: ", my_avl.get("it from attacking"))
+    # csv 4
+    print("my_avl get: ", my_avl.get("i quickly discovered that"))
 
 
 
 if __name__ == '__main__':
-    linked_dict("csv/1_gram.csv")
-    direct_acc_map("csv/1_gram.csv")
-    avl("csv/2_gram.csv")
+  #  linked_dict("csv/1_gram.csv")
+  #  direct_acc_map("csv/1_gram.csv")
+    avl("csv/4_gram.csv")

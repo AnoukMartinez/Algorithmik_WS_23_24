@@ -9,23 +9,63 @@ def print_all(dictionary):
         print(f"Key: {key}, Value: {value}")
 
 
-def linked_dict(filename: str):
-    my_dict = LinkedDictionary()
-    my_dict.put_from_csv(filename)
+def linked_dict(filename: str, csv_no: str):
+    my_linked_dict = LinkedDictionary()
+    my_linked_dict.put_from_csv(filename)
 
-    print("my_dict get:", my_dict.get("eighty-four"))
+    if csv_no == 'csv01':
+        # CSV1
+        print("BLOCK CSV01")
+        print("my_linked_dict get: ", my_linked_dict.get("eighty-four"))
+        print("my_linked_dict get_key: ", my_linked_dict.get_key("eighty-four"))
+    elif csv_no == 'csv02':
+        # CSV2
+        print("BLOCK CSV02")
+        print("my_linked_dict get: ", my_linked_dict.get("and hungry"))
+        print("my_linked_dict get_key: ", my_linked_dict.get_key("and hungry"))
+    elif csv_no == 'csv03':
+        # CSV3
+        print("BLOCK CSV03")
+        print("my_linked_dict get: ", my_linked_dict.get("it from attacking"))
+        print("my_linked_dict get_key: ", my_linked_dict.get_key("it from attacking"))
+    elif csv_no == 'csv04':
+        # CSV4
+        print("BLOCK CSV04")
+        print("my_linked_dict get: ", my_linked_dict.get("i quickly discovered that"))
+        print("my_linked_dict get_key: ", my_linked_dict.get_key("i quickly discovered that"))
+
+    # print("my_linked_dict get:", my_linked_dict.get("eighty-four"))
 
 
-# print_all(my_dict.get_all())
+# print_all(my_linked_dict.get_all())
 
 
-def direct_acc_map(filename: str):
-    my_dict = DirectAccessMap()
-    my_dict.put_from_csv(filename)
+def direct_acc_map(filename: str, csv_no: str):
+    my_direct_acc_map = DirectAccessMap()
+    my_direct_acc_map.put_from_csv(filename)
 
-    print("direct_acc_map get: ", my_dict.get("eighty-four"))
-    print("dict_acc_map get_key: ", my_dict.get_key("eighty-four"))
-    # print_all(my_dict.get_all())
+    if csv_no == 'csv01':
+        # CSV1
+        print("BLOCK CSV01")
+        print("my_direct_acc_map get: ", my_direct_acc_map.get("eighty-four"))
+        print("my_dict_acc_map get_key: ", my_direct_acc_map.get_key("eighty-four"))
+    elif csv_no == 'csv02':
+        # CSV2
+        print("BLOCK CSV02")
+        print("my_direct_acc_map get: ", my_direct_acc_map.get("and hungry"))
+        print("my_direct_acc_map get_key: ", my_direct_acc_map.get_key("and hungry"))
+    elif csv_no == 'csv03':
+        # CSV3
+        print("BLOCK CSV03")
+        print("my_direct_acc_map get: ", my_direct_acc_map.get("it from attacking"))
+        print("my_direct_acc_map get_key: ", my_direct_acc_map.get_key("it from attacking"))
+    elif csv_no == 'csv04':
+        # CSV4
+        print("BLOCK CSV04")
+        print("my_direct_acc_map get: ", my_direct_acc_map.get("i quickly discovered that"))
+        print("my_direct_acc_map get_key: ", my_direct_acc_map.get_key("i quickly discovered that"))
+
+    # print_all(my_direct_acc_map.get_all())
 
 
 def avl(filename: str):
@@ -40,11 +80,24 @@ def avl(filename: str):
     # csv 3
     # print("my_avl get: ", my_avl.get("it from attacking"))
     # csv 4
-    print("my_avl get: ", my_avl.get("i quickly discovered that"))
+    # print("my_avl get: ", my_avl.get("i quickly discovered that"))
 
+
+def avl_suggest(filename: str):
+    my_avl = AcNg.AutocompleteNgrams(filename)
+    print("my_avl: height: ", my_avl.avl_tree.height())
 
 
 if __name__ == '__main__':
-  #  linked_dict("csv/1_gram.csv")
-  #  direct_acc_map("csv/1_gram.csv")
-    avl("csv/4_gram.csv")
+    linked_dict("csv/1_gram.csv", "csv01")
+    linked_dict("csv/2_gram.csv", "csv02")
+    linked_dict("csv/3_gram.csv", "csv03")
+    linked_dict("csv/4_gram.csv", "csv04")
+
+    direct_acc_map("csv/1_gram.csv", "csv01")
+    direct_acc_map("csv/2_gram.csv", "csv02")
+    direct_acc_map("csv/3_gram.csv", "csv03")
+    direct_acc_map("csv/4_gram.csv", "csv04")
+
+    #  avl("csv/1_gram.csv")
+    # avl_suggest("csv/1_gram.csv")

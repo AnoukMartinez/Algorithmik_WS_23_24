@@ -1,4 +1,4 @@
-#Aufabe 1a get mit Konstanter Laufzeit
+# Aufabe 1a get mit Konstanter Laufzeit
 import csv
 
 
@@ -28,13 +28,19 @@ class LinkedDictionary:
         new_node.next_node = self.first
         self.first = new_node
 
-
     # get Funktion hat eine Laufzeit von O(n)
     def get(self, key):
         current_node = self.first
         while current_node is not None:
             if current_node.key == key:
-               # return current_node.value
+                return current_node.value
+            current_node = current_node.next_node
+        return None
+
+    def get_key(self, key):
+        current_node = self.first
+        while current_node is not None:
+            if current_node.key == key:
                 return current_node.key
             current_node = current_node.next_node
         return None

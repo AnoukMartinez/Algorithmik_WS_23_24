@@ -63,6 +63,7 @@ class AVLTree:
 		If the Key does not exist return new Node.
 		If the Key does exist return the Node that has been updated.
 		"""
+
         if self.root is None:
             new_node = self.create_new_node(key, value)
             self.root = new_node
@@ -246,11 +247,11 @@ class AVLTree:
             return False
 
     def _search(self, key, cur_node):
-        if key == cur_node.key:
+        if key == cur_node.key[0]:
             return True
-        elif key < cur_node.key and cur_node.left_child is not None:
+        elif key < cur_node.key[0] and cur_node.left_child is not None:
             return self._search(key, cur_node.left_child)
-        elif key > cur_node.key and cur_node.right_child is not None:
+        elif key > cur_node.key[0] and cur_node.right_child is not None:
             return self._search(key, cur_node.right_child)
         return False
 

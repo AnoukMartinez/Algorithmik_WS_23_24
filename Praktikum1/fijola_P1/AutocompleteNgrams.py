@@ -22,8 +22,21 @@ class AutocompleteNgrams:
             header = next(csv_reader)
 
             for row in csv_reader:
-                # TODO: Fügen Sie jede Reihe dem AVL Baum hinzu:
-                ...
+                # Prüfe, ob die Zeile leer ist
+                if not row:
+                    continue  # Wenn die Zeile leer ist, überspringe sie
+
+                # Teile das erste Element der Reihe am Komma
+                key_split = row[0].split(',')
+                value_split = row[1].strip()
+           #     print(f"SLITTING and KEY is {key_split} and VALUE is {value_split}")
+
+                # Prüfe, ob sowohl Schlüssel als auch Wert vorhanden sind
+              #  if len(key_split) == 1 & len(value_split) == 1:
+                key = key_split
+                value = value_split
+            #    print(f"VAL is 2 and KEY is {key} and VALUE is {value}")
+                self.avl_tree.insert(key, value)
 
     def get(self, ngram: str):
         """
@@ -31,7 +44,16 @@ class AutocompleteNgrams:
         :return: Wenn das ngram gefunden wurde, wird die Frequenz des N-grams zurückgegeben,
                 falls es nicht gefunden werden konnte wird None zurückgegeben.
         """
-        # TODO: Implementieren Sie diese Methode
+
+        # Rufe die search-Methode der AVLTree-Instanz auf
+        result = self.avl_tree.search(ngram)
+
+        if result is not None:
+            print(f"Key --> {ngram} <-- found with value: {result}")
+            return ngram
+        else:
+            print(f"Key --> {ngram} <-- not found its NONE.")
+            return None
 
     def get_k_possible_suggestions(self, input_string: str, k: int):
         """
@@ -45,4 +67,3 @@ class AutocompleteNgrams:
         searched_nodes = None
 
         return suggestions, searched_nodes
-

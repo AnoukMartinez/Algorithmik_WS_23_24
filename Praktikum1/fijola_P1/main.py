@@ -76,6 +76,7 @@ def avl(filename: str, csv_no: str):
         print("BLOCK CSV01")
         print("my_avl: height: ", my_avl.avl_tree.height())
         print("my_avl get: ", my_avl.get("eighty-four"))
+        # print("my_avl: get height: ", my_avl.avl_tree.get_height(my_avl.avl_tree.root))
     elif csv_no == 'csv02':
         # CSV2
         print("BLOCK CSV02")
@@ -102,22 +103,25 @@ def avl_suggest(filename: str, csv_no: str):
         # CSV1
         print("BLOCK CSV01")
         print("my_avl_suggest: height: ", my_avl_suggest.avl_tree.height())
-        # print("my_avl_suggest get: ", my_avl_suggest.get("eighty-four"))
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("ei", 1))
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("eigh", 1))
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("eighty", 1))
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("rog", 1))
     elif csv_no == 'csv02':
         # CSV2
         print("BLOCK CSV02")
         print("my_avl_suggest: height: ", my_avl_suggest.avl_tree.height())
-        # print("my_avl_suggest get: ", my_avl_suggest.get("and hungry"))
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("and hu", 1))
     elif csv_no == 'csv03':
         # CSV3
         print("BLOCK CSV03")
         print("my_avl_suggest: height: ", my_avl_suggest.avl_tree.height())
-        # print("my_avl_suggest get: ", my_avl_suggest.get("it from attacking"))
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("it from", 1))
     elif csv_no == 'csv04':
         # CSV4
         print("BLOCK CSV04")
         print("my_avl_suggest: height: ", my_avl_suggest.avl_tree.height())
-        # print("my_avl_suggest get: ", my_avl_suggest.get("i quickly discovered that"))
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("i quickly", 1))
 
 
 if __name__ == '__main__':

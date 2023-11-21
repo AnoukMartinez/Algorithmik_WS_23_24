@@ -1,4 +1,5 @@
 from typing import List, Optional
+from LinkedDictionary import LinkedDictionary as LinDict
 
 
 class AVLTree:
@@ -138,9 +139,32 @@ class AVLTree:
                  Anzahl der untersuchten Nodes.
 
         """
-        # TODO: Implementiere diese Methode
-        ngrams_dict = None
-        searched_nodes = None
+        ngrams_dict = {}
+        searched_nodes = 0
+
+        # Hilfsfunktion, um den AVL-Teilbaum zu durchsuchen
+        def search_subtree(node):
+            nonlocal ngrams_dict, searched_nodes
+
+            # Wenn der Knoten existiert, erhöhe die Anzahl der durchsuchten Nodes
+            if node is not None:
+                searched_nodes += 1
+
+
+                # Wenn das aktuelle Teilwort mit dem gegebenen 'word' beginnt, das Wort hinzufügen
+                if node.key[0].startswith(word):
+                    ngrams_dict[node.key[0]] = node.values[0]
+
+                # Entscheide, in welchen Teilbaum abgestiegen wird
+                if word < node.key[0]:
+                    # Das aktuelle Teilwort ist größer als das gesuchte 'word', also nach links gehen
+                    search_subtree(node.left_child)
+                elif word > node.key[0]:
+                    # Das aktuelle Teilwort ist kleiner als das gesuchte 'word', also nach rechts gehen
+                    search_subtree(node.right_child)
+
+        # Die Suche im AVL-Teilbaum starten
+        search_subtree(self.root)
 
         return ngrams_dict, searched_nodes
 

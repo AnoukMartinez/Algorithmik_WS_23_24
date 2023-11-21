@@ -29,13 +29,13 @@ class AutocompleteNgrams:
                 # Teile das erste Element der Reihe am Komma
                 key_split = row[0].split(',')
                 value_split = row[1].strip()
-           #     print(f"SLITTING and KEY is {key_split} and VALUE is {value_split}")
+                #     print(f"SLITTING and KEY is {key_split} and VALUE is {value_split}")
 
                 # Prüfe, ob sowohl Schlüssel als auch Wert vorhanden sind
-              #  if len(key_split) == 1 & len(value_split) == 1:
+                #  if len(key_split) == 1 & len(value_split) == 1:
                 key = key_split
                 value = value_split
-            #    print(f"VAL is 2 and KEY is {key} and VALUE is {value}")
+                #    print(f"VAL is 2 and KEY is {key} and VALUE is {value}")
                 self.avl_tree.insert(key, value)
 
     def get(self, ngram: str):
@@ -62,8 +62,18 @@ class AutocompleteNgrams:
         :return: Eine Liste mit den k Vorschlägen,
                 die Anzahl untersuchter Nodes im AVL Baum.
         """
-        # TODO: Implementieren Sie diese Methode
+
         suggestions = None
         searched_nodes = None
+
+        result, nodes = self.avl_tree.find_most_likely_ngrams(input_string)
+        print("Gegebenes Wort: ", input_string)
+        print("Mögliche Fortsetzungen:", result)
+        print("Anzahl der untersuchten Nodes:", nodes)
+
+        # TODO: Filtern nach den meisten aufrufen (also der Zahlenwert im Value) und dann die k höchsten zurückgeben
+        suggestions = result
+        searched_nodes = nodes
+
 
         return suggestions, searched_nodes

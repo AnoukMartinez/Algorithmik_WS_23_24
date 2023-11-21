@@ -1,4 +1,5 @@
-# Aufabe 1a get mit Konstanter Laufzeit
+# Aufgabe 1a get mit konstanter Laufzeit hier allerdings linear
+
 import csv
 
 

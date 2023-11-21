@@ -1,3 +1,5 @@
+# Aufgabe 1a get mit konstanter Laufzeit
+
 import csv
 
 

@@ -82,24 +82,23 @@ class AVLTree:
             return self._find(key, cur_node.right_child)
 
     def parse_tree(self, ngrams_array, curr_node, searched_nodes, word):
-        if curr_node is None:
-            return ngrams_array, searched_nodes
-        else:
+        if curr_node is not None:
             searched_nodes += 1
             if curr_node.key.startswith(word):
                 ngrams_array.append((curr_node.key, curr_node.value))
             
             if curr_node.left_child is not None:
-                self.parse_tree(ngrams_array, curr_node.left_child, searched_nodes, word)
+                ngrams_array, searched_nodes = self.parse_tree(ngrams_array, curr_node.left_child, searched_nodes, word)
 
             if curr_node.right_child is not None:
-                self.parse_tree(ngrams_array, curr_node.right_child, searched_nodes, word)
+                ngrams_array, searched_nodes = self.parse_tree(ngrams_array, curr_node.right_child, searched_nodes, word)
+        return ngrams_array, searched_nodes
 
     def find_most_likely_ngrams(self, word: str, root):
         ngrams_array = []
         searched_nodes = 0
 
-        self.parse_tree(ngrams_array, root, searched_nodes, word)
+        ngrams_array, searched_nodes = self.parse_tree(ngrams_array, root, searched_nodes, word)
         return ngrams_array, searched_nodes
 
     # OTHER AVL TREE FUNCTIONS

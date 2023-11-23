@@ -10,9 +10,9 @@ Quellen (Büchern, Webseiten, ...), die zur Erstellung des Datensatzes genutzt w
 vorkommt.
 2. [x] Schreiben Sie eine **Datenstruktur**, die die oben definierte Methode **„get()“** in konstanter
 Laufzeit implementiert.
-3. [ ] Schreiben Sie eine **Datenstruktur**, die beide Methoden **„get()“** und
+3. [x] Schreiben Sie eine **Datenstruktur**, die beide Methoden **„get()“** und
 **„get_k_possible_suggestions()“** in **logarithmischer Laufzeit** implementiert.
-4. [ ] **Testen** Sie die **Funktionalität** und **Laufzeit beider Datenstrukturen** mit verschiedenen
+4. [x] **Testen** Sie die **Funktionalität** und **Laufzeit beider Datenstrukturen** mit verschiedenen
 Wörtern/Wortanfängen und Datensätzen (2_gram.csv, 3_gram.csv, 4_gram.csv).
 5. [ ] **Erstellen** Sie eine **Präsentation** mit Ihren Ergebnissen und Erkenntnissen (Präsentationsdauer:
 10 Minuten). Zeigen Sie Ihre Resultate für ein paar Wörter.

@@ -105,12 +105,16 @@ class AutocompleteNgrams:
         # Sortiere die Vorschläge nach der beschriebenen Logik:
         # 1. Sortiere absteigend nach der Häufigkeit (Value) der Vorschläge (-int(node[1]))
         # 2. Wenn zwei Vorschläge die gleiche Häufigkeit haben, sortiere aufsteigend nach dem Vorschlagswort (node[0]).
-        # 2.1 Das bedeutet, dass Wörter mit dem gleichen Häufigkeitswert alphabetisch aufsteigend sortiert werden.
+        #    Das bedeutet, dass Wörter mit dem gleichen Häufigkeitswert alphabetisch aufsteigend sortiert werden.
         # 3. Begrenze die sortierte Liste auf die ersten k Elemente, um nur die gewünschte Anzahl an Vorschlägen zu erhalten.
 
-        suggestions = dict(
-            sorted(result.items(), key=lambda node: (-int(node[1]), node[0]))[:k]
-        )
+        suggestions = [key for key, _ in sorted(result.items(), key=lambda node: (-int(node[1]), node[0]))[:k]]
+
+        # Überprüfe, ob der Key im input_string ist und füge ihn am Anfang der Liste hinzu
+        if input_string in suggestions:
+            suggestions.remove(input_string)
+            suggestions.insert(0, input_string)
+
         searched_nodes = nodes
 
         # Gib die Vorschläge und die Anzahl der untersuchten Nodes zurück
@@ -143,13 +147,15 @@ class AutocompleteNgrams:
         #    Das bedeutet, dass Wörter mit dem gleichen Häufigkeitswert alphabetisch aufsteigend sortiert werden.
         # 3. Begrenze die sortierte Liste auf die ersten k Elemente, um nur die gewünschte Anzahl an Vorschlägen zu erhalten.
 
-        suggestions = dict(
-            sorted(result.items(), key=lambda node: (-int(node[1]), node[0][0]))[:k]
-        )
+        suggestions = [key for key, _ in sorted(result.items(), key=lambda node: (-int(node[1]), node[0][0]))[:k]]
+
+        # Überprüfe, ob der Key im input_string ist und füge ihn am Anfang der Liste hinzu
+        if input_string in suggestions:
+            suggestions.remove(input_string)
+            suggestions.insert(0, input_string)
+            
         searched_nodes = nodes
 
         # Gib die Vorschläge und die Anzahl der untersuchten Nodes zurück
-        return suggestions, searched_nodes
-
-    # Geschätzte Laufzeitkomplexität: O(n * log(n)), wobei n die Anzahl der Einträge im AVL-Baum ist.
+        return suggestions, searched_nodes    # Geschätzte Laufzeitkomplexität: O(n * log(n)), wobei n die Anzahl der Einträge im AVL-Baum ist.
 

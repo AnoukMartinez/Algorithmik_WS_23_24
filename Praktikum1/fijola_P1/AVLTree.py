@@ -150,7 +150,6 @@ class AVLTree:
             if node is not None:
                 searched_nodes += 1
 
-
                 # Wenn das aktuelle Teilwort mit dem gegebenen 'word' beginnt, das Wort hinzufügen
                 if node.key[0].startswith(word):
                     ngrams_dict[node.key[0]] = node.values[0]

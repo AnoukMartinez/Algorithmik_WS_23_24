@@ -153,6 +153,7 @@ class AVLTree:
                 # Wenn das aktuelle Teilwort mit dem gegebenen 'word' beginnt, das Wort hinzufügen
                 if node.key[0].startswith(word):
                     ngrams_dict[node.key[0]] = node.values[0]
+                    print("~~~~~~~~~~~~~~ NODE: ~~~~ ", node.key[0], " ~~~~ HINZUGEFÜGT ~~~~~~~~~~~~~~")
 
                 '''
                 if node.left_child is not None:

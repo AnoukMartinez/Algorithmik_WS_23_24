@@ -47,11 +47,11 @@ class AutocompleteNgrams:
 
         return ngrams_array[:k], searched_nodes
 
-autocomplete = AutocompleteNgrams()
-autocomplete.read_csv_file("1_gram.csv")
-print(autocomplete.get("dimwit"))
-print(autocomplete.get("midwit"))
+#autocomplete = AutocompleteNgrams()
+#autocomplete.read_csv_file("1_gram.csv")
+#print(autocomplete.get("dimwit"))
+#print(autocomplete.get("midwit"))
 
-suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 10)
-print(suggestions)
-print(searched_nodes)
+#suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 10)
+#print(suggestions)
+#print(searched_nodes)

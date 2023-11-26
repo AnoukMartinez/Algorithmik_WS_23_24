@@ -40,7 +40,8 @@ class LibraryHash:
         except:
             return None
 
-linkedHash = LibraryHash()
-linkedHash.read_csv_file("1_gram.csv")
-print(linkedHash.get("dimwit"))
-print(linkedHash.get("midwit"))
+
+#linkedHash = LibraryHash()
+#linkedHash.read_csv_file("1_gram.csv")
+#print(linkedHash.get("dimwit"))
+#print(linkedHash.get("midwit"))

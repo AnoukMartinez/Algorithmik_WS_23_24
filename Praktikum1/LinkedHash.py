@@ -59,7 +59,7 @@ class LinkedHashTable:
                     return word
         return None
 
-linkedHash = LinkedHashTable()
-linkedHash.read_csv_file("1_gram.csv")
-print(linkedHash.get("dimwit"))
-print(linkedHash.get("midwit"))
+#linkedHash = LinkedHashTable()
+#linkedHash.read_csv_file("1_gram.csv")
+#print(linkedHash.get("dimwit"))
+#print(linkedHash.get("midwit"))

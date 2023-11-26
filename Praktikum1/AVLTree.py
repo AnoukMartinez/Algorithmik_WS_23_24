@@ -83,7 +83,7 @@ class AVLTree:
 
         return node
 
-    def insert_csv_data(self, csv_file):
+    def insert_csv_data(self, csv_file): # Mit CSV Daten fuellen
         import csv
         with open(csv_file, 'r') as file:
             csv_reader = csv.reader(file)
@@ -91,11 +91,10 @@ class AVLTree:
             for row in csv_reader:
                 sentence = row[0]
                 count = int(row[1])
-                identifier = hash(sentence)
-                key = (sentence, identifier)
+                key = sentence
                 self.root = self.insert(self.root, key, count)
 
-    def get(self, key):
+    def get(self, key): # Pruefe ob Wort in Daten
         return self._get(self.root, key)
 
     def _get(self, node, key):
@@ -108,7 +107,7 @@ class AVLTree:
         else:
             return self._get(node.right, key)
 
-    def insert(self, node, key, data):
+    def insert(self, node, key, data): # hinzufuegen Nodes
         if node is None:
             return AVLNode(key, data)
 
@@ -165,7 +164,7 @@ class AVLTree:
 
         return result, count
 
-    def get_k_possible_suggestions(self, prefix, k):
+    def get_k_possible_suggestions(self, prefix, k): #Vorschlaege
         suggestions, nodes_searched = self._get_k_possible_suggestions(self.root, prefix, k)
         return suggestions, nodes_searched
 

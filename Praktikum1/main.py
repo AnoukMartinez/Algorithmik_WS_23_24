@@ -7,7 +7,7 @@ def get_suggestions_from_csv(csv_file, prefix, k):
 
     suggestions, nodes_searched = avl_tree.get_k_possible_suggestions(prefix, k)
 
-    print(f'Top {k} suggestions for words starting with "{prefix}":')
+    print(f'Top {k} words/phrases starting with "{prefix}":')
     for word, count in suggestions:
         print(f'{word}: {count} times')
 
@@ -20,7 +20,7 @@ def get_from_csv(csv_file, word_to_search):
     word_return = avl_tree.get(word_to_search)
 
     if word_return is not None:
-        print(f'The word "{word_to_search}" occurs in the dataset')
+        print(f'The word "{word_to_search}" is in the dataset')
     else:
         print(f'The word "{word_to_search}" is not in the dataset.')
 
@@ -29,8 +29,8 @@ def get_from_csv(csv_file, word_to_search):
 #get_from_csv('csv/1_gram.csv','eighty')
 
 #CSV - 2
-#get_suggestions_from_csv('csv/2_gram.csv', 'i ha', 1)
-get_from_csv('csv/2_gram.csv','i ha')
+get_suggestions_from_csv('csv/2_gram.csv', 'physique', 3)
+#get_from_csv('csv/2_gram.csv','physique is')
 
 #CSV - 3
 #get_suggestions_from_csv('csv/3_gram.csv', 'i have a', 3)

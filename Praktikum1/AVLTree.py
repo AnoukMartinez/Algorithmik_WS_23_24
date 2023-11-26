@@ -107,41 +107,6 @@ class AVLTree:
         else:
             return self._get(node.right, key)
 
-    def insert(self, node, key, data): # hinzufuegen Nodes
-        if node is None:
-            return AVLNode(key, data)
-
-        if key < node.key:
-            node.left = self.insert(node.left, key, data)
-        elif key > node.key:
-            node.right = self.insert(node.right, key, data)
-        else:
-            node.data += data
-            return node
-
-        self.update_height(node)
-        node.node_count = 1 + self.node_count(node.left) + self.node_count(node.right)
-
-        balance = self.balance_factor(node)
-
-        # Left heavy
-        if balance > 1:
-            if key < node.left.key:
-                return self.rotate_right(node)
-            else:
-                node.left = self.rotate_left(node.left)
-                return self.rotate_right(node)
-
-        # Right heavy
-        if balance < -1:
-            if key > node.right.key:
-                return self.rotate_left(node)
-            else:
-                node.right = self.rotate_right(node.right)
-                return self.rotate_left(node)
-
-        return node
-
     def node_count(self, node):
         if node is None:
             return 0

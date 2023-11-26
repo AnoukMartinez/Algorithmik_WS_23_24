@@ -25,11 +25,11 @@ def get_from_csv(csv_file, word_to_search):
         print(f'The word "{word_to_search}" is not in the dataset.')
 
 #CSV - 1
-#get_suggestions_from_csv('csv/1_gram.csv', 'eighty', 3)
+get_suggestions_from_csv('csv/1_gram.csv', 'fs', 10)
 #get_from_csv('csv/1_gram.csv','eighty')
 
 #CSV - 2
-get_suggestions_from_csv('csv/2_gram.csv', 'physique', 3)
+#et_suggestions_from_csv('csv/2_gram.csv', 'physi', 3)
 #get_from_csv('csv/2_gram.csv','physique is')
 
 #CSV - 3
@@ -37,5 +37,5 @@ get_suggestions_from_csv('csv/2_gram.csv', 'physique', 3)
 #get_from_csv('csv/3_gram.csv','i have a')
 
 #CSV - 4
-#get_suggestions_from_csv('csv/4_gram.csv', 'i have a q', 3)
+#get_suggestions_from_csv('csv/4_gram.csv', 'no wa', 4)
 #get_from_csv('csv/4_gram.csv','i have a q')

@@ -215,6 +215,14 @@ def avl_suggest(filename: str, csv_no: str):
         print("==========================================")
         print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("rog", 1))
         print("==========================================")
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("eg", 5))
+        print("=================get_k_possible_suggestions_alphabetical_asc=========================")
+        print("my_avl_suggest get_k_possible_suggestions_alphabetical_asc: ",
+              my_avl_suggest.get_k_possible_suggestions_alphabetical_asc("eg", 5))
+        print("=================get_k_possible_suggestions_alphabetical_desc=========================")
+        print("my_avl_suggest get_k_possible_suggestions_alphabetical_desc: ",
+              my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("eg", 5))
+        print("==========================================")
     elif csv_no == 'csv02':
         # CSV2
         print("==========================================")
@@ -286,7 +294,7 @@ def avl_suggest(filename: str, csv_no: str):
 
 
 if __name__ == '__main__':
-    """
+    '''
     linked_dict("csv/1_gram.csv", "csv01")
     linked_dict("csv/2_gram.csv", "csv02")
     linked_dict("csv/3_gram.csv", "csv03")
@@ -301,10 +309,10 @@ if __name__ == '__main__':
     avl("csv/2_gram.csv", "csv02")
     avl("csv/3_gram.csv", "csv03")
     avl("csv/4_gram.csv", "csv04")
+    
+    '''
 
     avl_suggest("csv/1_gram.csv", "csv01")
     avl_suggest("csv/2_gram.csv", "csv02")
     avl_suggest("csv/3_gram.csv", "csv03")
-    
-    """
     avl_suggest("csv/4_gram.csv", "csv04")

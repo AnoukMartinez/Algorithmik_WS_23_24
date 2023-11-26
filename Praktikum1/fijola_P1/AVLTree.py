@@ -154,18 +154,64 @@ class AVLTree:
                 if node.key[0].startswith(word):
                     ngrams_dict[node.key[0]] = node.values[0]
 
+                '''
+                if node.left_child is not None:
+                    if node.left_child.key[0].startswith(word):
+                        print("==== printer  links: ", node.left_child.key[0], " start with: ",
+                              node.left_child.key[0].startswith(word), " ====")
+                    else:
+                        print("printer  links: ", node.left_child.key[0], " start with: ",
+                              node.left_child.key[0].startswith(word))
+                if node.right_child is not None:
+                    if node.right_child.key[0].startswith(word):
+                        print("==== printer rechts: ", node.right_child.key[0], " start with: ",
+                              node.right_child.key[0].startswith(word), " ====")
+                    else:
+                        print("printer rechts: ", node.right_child.key[0], " start with: ",
+                              node.right_child.key[0].startswith(word))
+
+                '''
+
+                # Entkommentiere um den ersten Key des jeweiligen linken und rechten Teilbaum zu sehen, wenn vorhanden
+                #  self.print_node_info(node, word)
+
                 # Entscheide, in welchen Teilbaum abgestiegen wird
-                if word < node.key[0]:
-                    # Das aktuelle Teilwort ist größer als das gesuchte 'word', also nach links gehen
+                if node.left_child is not None and (word < node.key[0] or node.left_child.key[0].startswith(word)):
+                    # Das aktuelle Teilwort des Knotens ist größer als das gesuchte 'word' oder
+                    # der linke Teilbaum startet mit dem gesuchten 'word', also nach links gehen
+                    print("~~~~~~~~~~~~~~ GEHE IN  links: ", node.left_child.key[0], " ~~~~~~~~~~~~~~")
                     search_subtree(node.left_child)
-                elif word > node.key[0]:
-                    # Das aktuelle Teilwort ist kleiner als das gesuchte 'word', also nach rechts gehen
+                elif node.right_child is not None and (word > node.key[0] or node.right_child.key[0].startswith(word)):
+                    # Das aktuelle Teilwort des Knotens ist kleiner als das gesuchte 'word' oder
+                    # der rechte Teilbaum startet mit dem gesuchten 'word', also nach rechts gehen
+                    print("~~~~~~~~~~~~~~ GEHE IN rechts: ", node.right_child.key[0], " ~~~~~~~~~~~~~~")
                     search_subtree(node.right_child)
 
         # Die Suche im AVL-Teilbaum starten
         search_subtree(self.root)
 
         return ngrams_dict, searched_nodes
+
+    def print_node_info(self, node, word):
+        """
+        Diese Funktion druckt Informationen zu einem AVL-Knoten, abhängig von der Übereinstimmung mit dem gesuchten Wort.
+        """
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+        if node.left_child is not None:
+            if node.left_child.key[0].startswith(word):
+                print("==== printer  links: ", node.left_child.key[0], " start with: ",
+                      node.left_child.key[0].startswith(word), " ====")
+            else:
+                print("printer  links: ", node.left_child.key[0], " start with: ",
+                      node.left_child.key[0].startswith(word))
+        if node.right_child is not None:
+            if node.right_child.key[0].startswith(word):
+                print("==== printer rechts: ", node.right_child.key[0], " start with: ",
+                      node.right_child.key[0].startswith(word), " ====")
+            else:
+                print("printer rechts: ", node.right_child.key[0], " start with: ",
+                      node.right_child.key[0].startswith(word))
 
     def delete_key(self, key):
         return self.delete_node(self.find(key))

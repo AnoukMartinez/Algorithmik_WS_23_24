@@ -15,6 +15,9 @@ def linked_dict(filename: str, csv_no: str):
 
     if csv_no == 'csv01':
         # CSV1
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV01")
         print("==========================================")
         print("==========================================")
@@ -24,6 +27,9 @@ def linked_dict(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv02':
         # CSV2
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV02")
         print("==========================================")
         print("==========================================")
@@ -33,6 +39,9 @@ def linked_dict(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv03':
         # CSV3
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV03")
         print("==========================================")
         print("==========================================")
@@ -42,6 +51,9 @@ def linked_dict(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv04':
         # CSV4
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV04")
         print("==========================================")
         print("==========================================")
@@ -62,6 +74,9 @@ def direct_acc_map(filename: str, csv_no: str):
 
     if csv_no == 'csv01':
         # CSV1
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV01")
         print("==========================================")
         print("==========================================")
@@ -71,6 +86,9 @@ def direct_acc_map(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv02':
         # CSV2
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV02")
         print("==========================================")
         print("==========================================")
@@ -80,6 +98,9 @@ def direct_acc_map(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv03':
         # CSV3
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV03")
         print("==========================================")
         print("==========================================")
@@ -89,6 +110,9 @@ def direct_acc_map(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv04':
         # CSV4
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV04")
         print("==========================================")
         print("==========================================")
@@ -105,6 +129,9 @@ def avl(filename: str, csv_no: str):
 
     if csv_no == 'csv01':
         # CSV1
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV01")
         print("==========================================")
         print("==========================================")
@@ -115,6 +142,9 @@ def avl(filename: str, csv_no: str):
         # print("my_avl: get height: ", my_avl.avl_tree.get_height(my_avl.avl_tree.root))
     elif csv_no == 'csv02':
         # CSV2
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV02")
         print("==========================================")
         print("==========================================")
@@ -124,6 +154,9 @@ def avl(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv03':
         # CSV3
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV03")
         print("==========================================")
         print("==========================================")
@@ -133,6 +166,9 @@ def avl(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv04':
         # CSV4
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV04")
         print("==========================================")
         print("==========================================")
@@ -149,6 +185,9 @@ def avl_suggest(filename: str, csv_no: str):
 
     if csv_no == 'csv01':
         # CSV1
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV01")
         print("==========================================")
         print("==========================================")
@@ -178,6 +217,9 @@ def avl_suggest(filename: str, csv_no: str):
         print("==========================================")
     elif csv_no == 'csv02':
         # CSV2
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV02")
         print("==========================================")
         print("==========================================")
@@ -194,6 +236,9 @@ def avl_suggest(filename: str, csv_no: str):
               my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("and hu", 5))
     elif csv_no == 'csv03':
         # CSV3
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV03")
         print("==========================================")
         print("==========================================")
@@ -210,10 +255,23 @@ def avl_suggest(filename: str, csv_no: str):
               my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("it from", 3))
     elif csv_no == 'csv04':
         # CSV4
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
         print("BLOCK CSV04")
         print("==========================================")
         print("==========================================")
         print("my_avl_suggest: height: ", my_avl_suggest.avl_tree.height())
+        print("==========================================")
+        print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("no wa", 4))
+        print("=================get_k_possible_suggestions_alphabetical_asc=========================")
+        print("my_avl_suggest get_k_possible_suggestions_alphabetical_asc: ",
+              my_avl_suggest.get_k_possible_suggestions_alphabetical_asc("no wa", 4))
+        print("=================get_k_possible_suggestions_alphabetical_desc=========================")
+        print("my_avl_suggest get_k_possible_suggestions_alphabetical_desc: ",
+              my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("no wa", 4))
+
+
         print("==========================================")
         print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("i quic", 1))
         print("==========================================")
@@ -226,7 +284,9 @@ def avl_suggest(filename: str, csv_no: str):
               my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("i quic", 4))
 
 
+
 if __name__ == '__main__':
+    """
     linked_dict("csv/1_gram.csv", "csv01")
     linked_dict("csv/2_gram.csv", "csv02")
     linked_dict("csv/3_gram.csv", "csv03")
@@ -245,4 +305,6 @@ if __name__ == '__main__':
     avl_suggest("csv/1_gram.csv", "csv01")
     avl_suggest("csv/2_gram.csv", "csv02")
     avl_suggest("csv/3_gram.csv", "csv03")
+    
+    """
     avl_suggest("csv/4_gram.csv", "csv04")

@@ -1,6 +1,6 @@
 import time
 
-from Algorithmik_WS_23_24.Praktikum1.AVLTree import AVLTree
+from Algorithmik_WS_23_24.Praktikum1.daniel.AVLTree import AVLTree
 
 
 def get_suggestions_from_csv(csv_file, prefix, k):
@@ -26,8 +26,10 @@ def get_from_csv(csv_file, word_to_search):
     else:
         print(f'The word "{word_to_search}" is not in the dataset.')
 
+
+
 #CSV - 1
-get_suggestions_from_csv('csv/1_gram.csv', 'eighty', 3)
+get_suggestions_from_csv('../csv/1_gram.csv', 'eighty', 3)
 #get_from_csv('csv/1_gram.csv','eighty')
 
 #CSV - 2

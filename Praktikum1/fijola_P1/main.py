@@ -279,7 +279,6 @@ def avl_suggest(filename: str, csv_no: str):
         print("my_avl_suggest get_k_possible_suggestions_alphabetical_desc: ",
               my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("no wa", 4))
 
-
         print("==========================================")
         print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("i quic", 1))
         print("==========================================")
@@ -292,27 +291,23 @@ def avl_suggest(filename: str, csv_no: str):
               my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("i quic", 4))
 
 
-
 if __name__ == '__main__':
-    '''
-    linked_dict("csv/1_gram.csv", "csv01")
-    linked_dict("csv/2_gram.csv", "csv02")
-    linked_dict("csv/3_gram.csv", "csv03")
-    linked_dict("csv/4_gram.csv", "csv04")
+    linked_dict("../csv/1_gram.csv", "csv01")
+    linked_dict("../csv/2_gram.csv", "csv02")
+    linked_dict("../csv/3_gram.csv", "csv03")
+    linked_dict("../csv/4_gram.csv", "csv04")
 
-    direct_acc_map("csv/1_gram.csv", "csv01")
-    direct_acc_map("csv/2_gram.csv", "csv02")
-    direct_acc_map("csv/3_gram.csv", "csv03")
-    direct_acc_map("csv/4_gram.csv", "csv04")
+    direct_acc_map("../csv/1_gram.csv", "csv01")
+    direct_acc_map("../csv/2_gram.csv", "csv02")
+    direct_acc_map("../csv/3_gram.csv", "csv03")
+    direct_acc_map("../csv/4_gram.csv", "csv04")
 
-    avl("csv/1_gram.csv", "csv01")
-    avl("csv/2_gram.csv", "csv02")
-    avl("csv/3_gram.csv", "csv03")
-    avl("csv/4_gram.csv", "csv04")
-    
-    '''
+    avl("../csv/1_gram.csv", "csv01")
+    avl("../csv/2_gram.csv", "csv02")
+    avl("../csv/3_gram.csv", "csv03")
+    avl("../csv/4_gram.csv", "csv04")
 
-    avl_suggest("csv/1_gram.csv", "csv01")
-    avl_suggest("csv/2_gram.csv", "csv02")
-    avl_suggest("csv/3_gram.csv", "csv03")
-    avl_suggest("csv/4_gram.csv", "csv04")
+    avl_suggest("../csv/1_gram.csv", "csv01")
+    avl_suggest("../csv/2_gram.csv", "csv02")
+    avl_suggest("../csv/3_gram.csv", "csv03")
+    avl_suggest("../csv/4_gram.csv", "csv04")

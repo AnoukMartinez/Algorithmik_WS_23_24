@@ -22,7 +22,7 @@ def library_hash():
 def autocomplete():
     print("======== Start autocomplete =========")
     autocomplete = AutocompleteNgrams()
-    autocomplete.read_csv_file("1_gram.csv")
+    autocomplete.read_csv_file("../csv/1_gram.csv")
     print(autocomplete.get("dimwit"))
     print(autocomplete.get("midwit"))
 

@@ -136,49 +136,57 @@ class AVLTree:
         else:
             return self._get(node.right, key)
 
-    def _get_k_possible_suggestions(self, node, preword, k, count, suggestions):  # O(log(n)) - O(n) - best/worstss case
+    def _get_k_possible_suggestions(self, node, preword, k, suggestions):  # O(log(n)) - O(n) - best/worstss
+        # case - je nachdem ob balanced tree oder nicht
+
+        CountFound = 0  # stellt sicher das genau (k) gefunden werden
+        count = 0  # Anzahl untersuchter Nodes
+
         while node is not None:
+
+            count += 1
+
             if node.key.startswith(preword):
                 suggestions.append((node.key, node.data))
-                count += 1
-                if count == k:
+                CountFound += 1
+                if CountFound == k:
                     break
                 node = node.left
             elif preword < node.key:
                 node = node.left
             else:
                 node = node.right
-
-        if node is not None:
-            count = self._get_k_possible_suggestions(node.left, preword, k, count, suggestions)
 
         return count
 
     def get_k_possible_suggestions(self, preword, k):
         suggestions = []
-        count = self._get_k_possible_suggestions(self.root, preword, k, 0, suggestions)
+        count = self._get_k_possible_suggestions(self.root, preword, k,  suggestions)
         sorted_suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)  # O(k log k)
         return sorted_suggestions[:k], count
 
     # WITH TIMER
 
-    def _get_k_possible_suggestions_TIME(self, node, preword, k, count, suggestions):
+    def _get_k_possible_suggestions_TIME(self, node, preword, k, suggestions):
         start_time = timeit.default_timer()
 
+        CountFound = 0  # stellt sicher das genau (k) gefunden werden
+        count = 0  # Anzahl untersuchter Nodes
+
         while node is not None:
+
+            count += 1
+
             if node.key.startswith(preword):
                 suggestions.append((node.key, node.data))
-                count += 1
-                if count == k:
+                CountFound += 1
+                if CountFound == k:
                     break
                 node = node.left
             elif preword < node.key:
                 node = node.left
             else:
                 node = node.right
-
-        if node is not None:
-            count = self._get_k_possible_suggestions_TIME(node.left, preword, k, count, suggestions)
 
         end_time = timeit.default_timer()
         gone_time = end_time - start_time
@@ -187,6 +195,6 @@ class AVLTree:
 
     def get_k_possible_suggestions_TIME(self, preword, k):
         suggestions = []
-        count, gone_time = self._get_k_possible_suggestions_TIME(self.root, preword, k, 0, suggestions)
+        count, gone_time = self._get_k_possible_suggestions_TIME(self.root, preword, k, suggestions)
         sorted_suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)
         return sorted_suggestions[:k], count, gone_time

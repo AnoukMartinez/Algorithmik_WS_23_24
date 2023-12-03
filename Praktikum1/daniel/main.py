@@ -50,8 +50,8 @@ get_suggestions_from_csv_withTime('../csv/1_gram.csv', 'eighty', 3)
 get_from_csv('../csv/1_gram.csv', 'eighty')
 
 # CSV - 2
-# et_suggestions_from_csv('csv/2_gram.csv', 'physi', 3)
-# get_from_csv('csv/2_gram.csv','physique is')
+# get_suggestions_from_csv_withTime('../csv/2_gram.csv', 'physi', 3)
+# get_from_csv('../csv/2_gram.csv','physique is')
 
 # CSV - 3
 # get_suggestions_from_csv('csv/3_gram.csv', 'i have a', 3)

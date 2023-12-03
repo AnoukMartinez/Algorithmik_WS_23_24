@@ -11,6 +11,9 @@ class AVLNode:
 
 
 class AVLTree:
+
+    # BASE SETUP
+
     def __init__(self):
         self.root = None
 
@@ -86,6 +89,10 @@ class AVLTree:
 
         return node
 
+    # BASE SETUP END
+
+    # CSV TO DATA
+
     def insert_csv_data(self, csv_file):  # Mit CSV Daten fuellen
         import csv
         with open(csv_file, 'r') as file:
@@ -110,9 +117,11 @@ class AVLTree:
                 self.root = self.insert(self.root, key, count)
 
         end_time = timeit.default_timer()
-        elapsed_time = end_time - start_time
+        gone_time = end_time - start_time
 
-        return  elapsed_time
+        return gone_time
+
+    # CSV TO DATA END
 
     def get(self, key):  # Pruefe ob Wort in Daten
         return self._get(self.root, key)
@@ -127,58 +136,57 @@ class AVLTree:
         else:
             return self._get(node.right, key)
 
-    def _get_k_possible_suggestions(self, node, prefix, k, count, suggestions):
+    def _get_k_possible_suggestions(self, node, preword, k, count, suggestions):  # O(log(n)) - O(n) - best/worstss case
         while node is not None:
-            if node.key.startswith(prefix):
+            if node.key.startswith(preword):
                 suggestions.append((node.key, node.data))
                 count += 1
                 if count == k:
                     break
                 node = node.left
-            elif prefix < node.key:
+            elif preword < node.key:
                 node = node.left
             else:
                 node = node.right
 
         if node is not None:
-            count = self._get_k_possible_suggestions(node.left, prefix, k, count, suggestions)
+            count = self._get_k_possible_suggestions(node.left, preword, k, count, suggestions)
 
         return count
 
-    def get_k_possible_suggestions(self, prefix, k):
+    def get_k_possible_suggestions(self, preword, k):
         suggestions = []
-        count = self._get_k_possible_suggestions(self.root, prefix, k, 0, suggestions)
-        sorted_suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)
+        count = self._get_k_possible_suggestions(self.root, preword, k, 0, suggestions)
+        sorted_suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)  # O(k log k)
         return sorted_suggestions[:k], count
 
     # WITH TIMER
 
-
-    def _get_k_possible_suggestions_TIME(self, node, prefix, k, count, suggestions):
+    def _get_k_possible_suggestions_TIME(self, node, preword, k, count, suggestions):
         start_time = timeit.default_timer()
 
         while node is not None:
-            if node.key.startswith(prefix):
+            if node.key.startswith(preword):
                 suggestions.append((node.key, node.data))
                 count += 1
                 if count == k:
                     break
                 node = node.left
-            elif prefix < node.key:
+            elif preword < node.key:
                 node = node.left
             else:
                 node = node.right
 
         if node is not None:
-            count = self._get_k_possible_suggestions_TIME(node.left, prefix, k, count, suggestions)
+            count = self._get_k_possible_suggestions_TIME(node.left, preword, k, count, suggestions)
 
         end_time = timeit.default_timer()
-        elapsed_time = end_time - start_time
+        gone_time = end_time - start_time
 
-        return count, elapsed_time
+        return count, gone_time
 
-    def get_k_possible_suggestions_TIME(self, prefix, k):
+    def get_k_possible_suggestions_TIME(self, preword, k):
         suggestions = []
-        count, elapsed_time = self._get_k_possible_suggestions_TIME(self.root, prefix, k, 0, suggestions)
+        count, gone_time = self._get_k_possible_suggestions_TIME(self.root, preword, k, 0, suggestions)
         sorted_suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)
-        return sorted_suggestions[:k], count, elapsed_time
+        return sorted_suggestions[:k], count, gone_time

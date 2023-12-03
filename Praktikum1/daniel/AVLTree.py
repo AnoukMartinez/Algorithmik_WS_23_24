@@ -5,7 +5,6 @@ class AVLNode:
         self.left = left
         self.right = right
         self.height = 1
-        self.node_count = 1
 
 class AVLTree:
     def __init__(self):
@@ -107,11 +106,6 @@ class AVLTree:
         else:
             return self._get(node.right, key)
 
-    def node_count(self, node):
-        if node is None:
-            return 0
-        return node.node_count
-
     def startswith(self, node, prefix, k):
         result = []
         count = 0
@@ -137,13 +131,13 @@ class AVLTree:
         if node is None:
             return [], 0
 
-        suggestions, count = [], 0
+        suggestions, count = [], 1
 
         while node is not None:
             if node.key.startswith(prefix):
                 result, node_count = self.startswith(node.right, prefix, k - count)
                 suggestions.extend(result)
-                count += node_count + 1
+                count += 1
                 node = node.left
             elif prefix < node.key:
                 node = node.left

@@ -106,12 +106,10 @@ class AVLTree:
         else:
             return self._get(node.right, key)
 
-    def startswith(self, node, prefix, k):
-        result = []
-        count = 0
+    def _get_k_possible_suggestions(self, node, prefix, k, count, suggestions):
         while node is not None:
             if node.key.startswith(prefix):
-                result.append((node.key, node.data))
+                suggestions.append((node.key, node.data))
                 count += 1
                 if count == k:
                     break
@@ -121,28 +119,13 @@ class AVLTree:
             else:
                 node = node.right
 
-        return result, count
+        if node is not None:
+            count = self._get_k_possible_suggestions(node.left, prefix, k, count, suggestions)
 
-    def get_k_possible_suggestions(self, prefix, k): #Vorschlaege
-        suggestions, nodes_searched = self._get_k_possible_suggestions(self.root, prefix, k)
-        return suggestions, nodes_searched
+        return count
 
-    def _get_k_possible_suggestions(self, node, prefix, k):
-        if node is None:
-            return [], 0
-
-        suggestions, count = [], 1
-
-        while node is not None:
-            if node.key.startswith(prefix):
-                result, node_count = self.startswith(node.right, prefix, k - count)
-                suggestions.extend(result)
-                count += 1
-                node = node.left
-            elif prefix < node.key:
-                node = node.left
-            else:
-                node = node.right
-
+    def get_k_possible_suggestions(self, prefix, k):
+        suggestions = []
+        count = self._get_k_possible_suggestions(self.root, prefix, k, 0, suggestions)
         sorted_suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)
         return sorted_suggestions[:k], count

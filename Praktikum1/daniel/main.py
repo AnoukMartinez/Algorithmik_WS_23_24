@@ -2,6 +2,20 @@ import time
 
 from Algorithmik_WS_23_24.Praktikum1.daniel.AVLTree import AVLTree
 
+def get_suggestions_from_csv_withTime(csv_file, prefix, k):
+    avl_tree = AVLTree()
+    timeInsert = avl_tree.insert_csv_data_TIME(csv_file)
+
+    print(f'Time needed insert CSV > {timeInsert}')
+
+    suggestions, nodes_searched, timeneeded = avl_tree.get_k_possible_suggestions_TIME(prefix, k)
+
+    print(f'Top {k} words/phrases starting with "{prefix}":')
+    for word, count in suggestions:
+        print(f'{word}: {count} times')
+
+    print(f'Number of nodes searched: {nodes_searched}')
+    print(f'Time needed: {timeneeded}')
 
 def get_suggestions_from_csv(csv_file, prefix, k):
     avl_tree = AVLTree()
@@ -29,7 +43,8 @@ def get_from_csv(csv_file, word_to_search):
 
 
 #CSV - 1
-get_suggestions_from_csv('../csv/1_gram.csv', 'eighty', 3)
+#get_suggestions_from_csv('../csv/1_gram.csv', 'eighty', 3)
+get_suggestions_from_csv_withTime('../csv/2_gram.csv', 'eighty', 3)
 #get_from_csv('csv/1_gram.csv','eighty')
 
 #CSV - 2

@@ -1,6 +1,22 @@
 import time
 
-from Algorithmik_WS_23_24.Praktikum1.AVLTree import AVLTree
+from Algorithmik_WS_23_24.Praktikum1.daniel.AVLTree import AVLTree
+
+
+def get_suggestions_from_csv_withTime(csv_file, prefix, k):
+    avl_tree = AVLTree()
+    timeInsert = avl_tree.insert_csv_data_TIME(csv_file)
+
+    print(f'Time needed insert CSV > {timeInsert}')
+
+    suggestions, nodes_searched, time_needed = avl_tree.get_k_possible_suggestions_TIME(prefix, k)
+
+    print(f'Top {k} words/phrases starting with "{prefix}":')
+    for word, count in suggestions:
+        print(f'{word}: {count} times')
+
+    print(f'Number of nodes searched: {nodes_searched}')
+    print(f'Time needed: {time_needed}')
 
 
 def get_suggestions_from_csv(csv_file, prefix, k):
@@ -15,6 +31,7 @@ def get_suggestions_from_csv(csv_file, prefix, k):
 
     print(f'Number of nodes searched: {nodes_searched}')
 
+
 def get_from_csv(csv_file, word_to_search):
     avl_tree = AVLTree()
     avl_tree.insert_csv_data(csv_file)
@@ -26,18 +43,20 @@ def get_from_csv(csv_file, word_to_search):
     else:
         print(f'The word "{word_to_search}" is not in the dataset.')
 
-#CSV - 1
-get_suggestions_from_csv('csv/1_gram.csv', 'eighty', 3)
-#get_from_csv('csv/1_gram.csv','eighty')
 
-#CSV - 2
-#et_suggestions_from_csv('csv/2_gram.csv', 'physi', 3)
-#get_from_csv('csv/2_gram.csv','physique is')
+# CSV - 1
+get_suggestions_from_csv('../csv/1_gram.csv', 'eighty', 3)
+get_suggestions_from_csv_withTime('../csv/1_gram.csv', 'eighty', 3)
+get_from_csv('../csv/1_gram.csv', 'eighty')
 
-#CSV - 3
-#get_suggestions_from_csv('csv/3_gram.csv', 'i have a', 3)
-#get_from_csv('csv/3_gram.csv','i have a')
+# CSV - 2
+# get_suggestions_from_csv_withTime('../csv/2_gram.csv', 'physi', 3)
+# get_from_csv('../csv/2_gram.csv','physique is')
 
-#CSV - 4
-#get_suggestions_from_csv('csv/4_gram.csv', 'no wa', 4)
-#get_from_csv('csv/4_gram.csv','i have a q')
+# CSV - 3
+# get_suggestions_from_csv('csv/3_gram.csv', 'i have a', 3)
+# get_from_csv('csv/3_gram.csv','i have a')
+
+# CSV - 4
+# get_suggestions_from_csv('csv/4_gram.csv', 'no wa', 4)
+# get_from_csv('csv/4_gram.csv','i have a q')

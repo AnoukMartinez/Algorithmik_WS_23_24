@@ -1,6 +1,6 @@
 import time
 
-from Algorithmik_WS_23_24.Praktikum1.daniel.AVLTree import AVLTree
+from Praktikum1.daniel.AVLTree import AVLTree
 
 
 def get_suggestions_from_csv_withTime(csv_file, prefix, k):
@@ -45,9 +45,13 @@ def get_from_csv(csv_file, word_to_search):
 
 
 # CSV - 1
-get_suggestions_from_csv('../csv/1_gram.csv', 'eighty', 3)
-get_suggestions_from_csv_withTime('../csv/1_gram.csv', 'eighty', 3)
-get_from_csv('../csv/1_gram.csv', 'eighty')
+#get_suggestions_from_csv('csv/1_gram.csv', 'eighty', 3)
+#get_suggestions_from_csv_withTime('csv/1_gram.csv', 'eighty', 3)
+#get_from_csv('csv/1_gram.csv', 'eighty')
+
+get_suggestions_from_csv('csv/1_gram.csv', 'tom', 200)
+get_suggestions_from_csv_withTime('csv/1_gram.csv', 'tom', 200)
+get_from_csv('csv/1_gram.csv', 'tom')
 
 # CSV - 2
 # get_suggestions_from_csv_withTime('../csv/2_gram.csv', 'physi', 3)

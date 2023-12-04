@@ -26,9 +26,10 @@ def autocomplete():
     print(autocomplete.get("dimwit"))
     print(autocomplete.get("midwit"))
 
-    suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 10)
+    suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 200)
     print(suggestions)
     print(searched_nodes)
+    print("ANZAHL DER EINTRÄGE IN DER LISTE mit k 200: ", len(suggestions))
 
 
 # Press the green button in the gutter to run the script.

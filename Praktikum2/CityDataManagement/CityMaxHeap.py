@@ -1,6 +1,6 @@
 from typing import List
-from CityDataManagement.City import City
-from CityDataManagement.AbstractCityHeap import AbstractCityHeap
+from Praktikum2.CityDataManagement.City import City
+from Praktikum2.CityDataManagement.AbstractCityHeap import AbstractCityHeap
 
 
 class CityMaxHeap(AbstractCityHeap):

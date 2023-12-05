@@ -1,11 +1,11 @@
 from typing import List
 
-from CityDataManagement.City import City
-from CityDataImport.CityDataImporter import CityDataImporter
-from CityDataManagement.CityDataManager import CityDataManager
-from CityDataManagement.ICityDataManagerAccess import ICityDataManagerAccess
-from ExecutionTimeAnalyser.ExecutionTimeAnalyser import ExecutionTimeAnalyser
-from Visualization.CityMaxHeapVisualizer import CityMaxHeapVisualizer
+from Praktikum2.CityDataManagement.City import City
+from Praktikum2.CityDataImport.CityDataImporter import CityDataImporter
+from Praktikum2.CityDataManagement.CityDataManager import CityDataManager
+from Praktikum2.CityDataManagement.ICityDataManagerAccess import ICityDataManagerAccess
+from Praktikum2.ExecutionTimeAnalyser.ExecutionTimeAnalyser import ExecutionTimeAnalyser
+from Praktikum2.Visualization.CityMaxHeapVisualizer import CityMaxHeapVisualizer
 
 
 class HeapCreationAssembler:

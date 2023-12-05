@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import List
-from CityDataManagement.City import City
+from Praktikum2.CityDataManagement.City import City
 
 
 class ICityDataManagerAccess(ABC):

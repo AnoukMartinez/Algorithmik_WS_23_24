@@ -277,9 +277,9 @@ def avl_suggest(filename: str, csv_no: str):
         print("==========================================")
         print("my_avl_suggest: height: ", my_avl_suggest.avl_tree.height())
         print("==========================================")
-        my_suggest01 = my_avl_suggest.get_k_possible_suggestions("no", 66000)
+        # my_suggest01 = my_avl_suggest.get_k_possible_suggestions("no", 66000)
         # print("my_avl_suggest get_k_possible_suggestions: ", my_suggest01)
-        print("ANZAHL DER ELEMENTE BEI k = 66000: ", len(my_suggest01[0]))
+        # print("ANZAHL DER ELEMENTE BEI k = 66000: ", len(my_suggest01[0]))
         # print("=================get_k_possible_suggestions_alphabetical_asc=========================")
         # print("my_avl_suggest get_k_possible_suggestions_alphabetical_asc: ",
         #      my_avl_suggest.get_k_possible_suggestions_alphabetical_asc("no", 200))
@@ -288,6 +288,10 @@ def avl_suggest(filename: str, csv_no: str):
         #     my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("no", 200))
 
         print("==========================================")
+        my_suggest02 = my_avl_suggest.get_k_possible_suggestions("i quic", 4)
+        print("my_avl_suggest get_k_possible_suggestions: ", my_suggest02)
+        print("ANZAHL DER ELEMENTE BEI k = 4: ", len(my_suggest02[0]))
+
         '''
         print("my_avl_suggest get_k_possible_suggestions: ", my_avl_suggest.get_k_possible_suggestions("no wa", 4))
         print("=================get_k_possible_suggestions_alphabetical_asc=========================")
@@ -308,6 +312,21 @@ def avl_suggest(filename: str, csv_no: str):
         print("my_avl_suggest get_k_possible_suggestions_alphabetical_desc: ",
               my_avl_suggest.get_k_possible_suggestions_alphabetical_desc("i quic", 4))
         '''
+
+    elif csv_no == 'csv05':
+        # CSV5 avltree_head.csv
+        print("==========================================")
+        print("==========================================")
+        print("==========================================")
+        print("BLOCK CSV04")
+        print("==========================================")
+        print("==========================================")
+        print("my_avl_suggest: height: ", my_avl_suggest.avl_tree.height())
+        print("==========================================")
+        print("==========================================")
+        my_suggest01 = my_avl_suggest.get_k_possible_suggestions("head", 30)
+        print("my_avl_suggest get_k_possible_suggestions: ", my_suggest01)
+        print("ANZAHL DER ELEMENTE BEI k = 30: ", len(my_suggest01[0]))
 
 
 if __name__ == '__main__':
@@ -330,3 +349,4 @@ if __name__ == '__main__':
     # avl_suggest("csv/2_gram.csv", "csv02")
     # avl_suggest("csv/3_gram.csv", "csv03")
     avl_suggest("csv/4_gram.csv", "csv04")
+    # avl_suggest("csv/avltree_head.csv", "csv05")

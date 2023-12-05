@@ -164,7 +164,7 @@ class AVLTree:
                 elif word < node.key[0]:
                     # Das gesuchte 'word' ist kleiner, also nach links gehen
                     search_subtree(node.left_child)
-                else:
+                elif word >= node.key[0]:
                     # Das gesuchte 'word' ist größer, also nach rechts gehen
                     search_subtree(node.right_child)
 

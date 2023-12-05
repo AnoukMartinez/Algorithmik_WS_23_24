@@ -49,9 +49,13 @@ def get_from_csv(csv_file, word_to_search):
 #get_suggestions_from_csv_withTime('csv/1_gram.csv', 'eighty', 3)
 #get_from_csv('csv/1_gram.csv', 'eighty')
 
-get_suggestions_from_csv('csv/1_gram.csv', 'tom', 200)
-get_suggestions_from_csv_withTime('csv/1_gram.csv', 'tom', 200)
-get_from_csv('csv/1_gram.csv', 'tom')
+#get_suggestions_from_csv('csv/1_gram.csv', 'tom', 200)
+#get_suggestions_from_csv_withTime('csv/1_gram.csv', 'tom', 200)
+#get_from_csv('csv/1_gram.csv', 'tom')
+
+get_suggestions_from_csv('csv/4_gram.csv', 'no', 66000)
+get_suggestions_from_csv_withTime('csv/4_gram.csv', 'no', 66000)
+get_from_csv('csv/4_gram.csv', 'no')
 
 # CSV - 2
 # get_suggestions_from_csv_withTime('../csv/2_gram.csv', 'physi', 3)

@@ -1,0 +1,8 @@
+name: algo_heaps
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - networkx
+  - bokeh

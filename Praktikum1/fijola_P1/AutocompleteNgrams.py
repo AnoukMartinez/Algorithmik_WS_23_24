@@ -17,6 +17,8 @@ class AutocompleteNgrams:
 
         :param filename: Der Dateipfad zum csv file
         """
+
+        anzahl = 0
         with open(filename, mode='r') as file:
             csv_reader = csv.reader(file)
             header = next(csv_reader)
@@ -37,6 +39,8 @@ class AutocompleteNgrams:
                 value = value_split
                 #    print(f"VAL is 2 and KEY is {key} and VALUE is {value}")
                 self.avl_tree.insert(key, value)
+                anzahl = anzahl + 1
+        print("Anzahl an WORTEN IM FILE: ", anzahl)
 
     def get(self, ngram: str):
         """
@@ -153,9 +157,8 @@ class AutocompleteNgrams:
         if input_string in suggestions:
             suggestions.remove(input_string)
             suggestions.insert(0, input_string)
-            
+
         searched_nodes = nodes
 
         # Gib die Vorschläge und die Anzahl der untersuchten Nodes zurück
-        return suggestions, searched_nodes    # Geschätzte Laufzeitkomplexität: O(n * log(n)), wobei n die Anzahl der Einträge im AVL-Baum ist.
-
+        return suggestions, searched_nodes  # Geschätzte Laufzeitkomplexität: O(n * log(n)), wobei n die Anzahl der Einträge im AVL-Baum ist.

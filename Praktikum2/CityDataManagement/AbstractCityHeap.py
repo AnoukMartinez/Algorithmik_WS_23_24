@@ -264,7 +264,6 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me! CHECK if FINISH
 
-
         if self.has_left_child(index):
             return self.heapStorage[self.get_left_child_index(index)].population
 

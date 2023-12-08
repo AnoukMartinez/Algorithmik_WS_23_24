@@ -1,3 +1,4 @@
+import math
 from abc import ABC, abstractmethod
 from typing import List
 from Praktikum2.CityDataManagement.City import City
@@ -132,29 +133,45 @@ class AbstractCityHeap(ABC):
         """
         Return the City at the Root
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        return self.heapStorage[0].name
 
     def get_parent_index(self, index):
         """
         Return the index of the parent node. 
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+
+        if index > 0:
+            return math.floor((index-1)/2)
 
     def get_left_child_index(self, index):
         """
         Return the index of the left child. 
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        left = ((2*index)+1)
+        try:
+            self.heapStorage[left]
+        except IndexError:
+            return None
+        return left
 
     def get_right_child_index(self, index):
         """
         Return the index of the right child. 
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        right = ((2*index)+2)
+        try:
+            self.heapStorage[right]
+        except IndexError:
+            return None
+        return right
 
     def has_parent(self, index) -> bool:
         """
@@ -164,8 +181,16 @@ class AbstractCityHeap(ABC):
 
             False   = No parent
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+
+        # return index != 0 and math.floor((index-1)/2) >= 0
+
+        try:
+            self.heapStorage[math.floor((index-1)/2)]
+        except IndexError:
+            return False
+        return True
 
     def has_left_child(self, index):
         """
@@ -179,8 +204,13 @@ class AbstractCityHeap(ABC):
         -----
         The Index of the Child can be used for this purpose.
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        try:
+            self.heapStorage[((2*index)+1)]
+        except IndexError:
+            return False
+        return True
 
     def has_right_child(self, index):
         """
@@ -194,15 +224,21 @@ class AbstractCityHeap(ABC):
         -----
         The Index of the Child can be used for this purpose.
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        try:
+            self.heapStorage[((2*index)+2)]
+        except IndexError:
+            return False
+        return True
 
     def get_city_population(self, index):
         """
         Return the Population of a City with the given index in the heap.
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        return self.heapStorage[index].population
 
     def get_parent_population(self, index):
         """
@@ -212,8 +248,11 @@ class AbstractCityHeap(ABC):
         -----
         We need the position of the parent in the StorageArray to extract the population from this position.
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+
+        if self.has_parent(index):
+            return self.heapStorage[self.get_parent_index(index)].population
 
     def get_left_child_population(self, index):
         """
@@ -223,8 +262,11 @@ class AbstractCityHeap(ABC):
         -----
         We need the position of the child in the StorageArray to extract the population from this position.
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+
+        if self.has_left_child(index):
+            return self.heapStorage[self.get_left_child_index(index)].population
 
     def get_right_child_population(self, index):
         """
@@ -234,8 +276,10 @@ class AbstractCityHeap(ABC):
         -----
         We need the position of the child in the StorageArray to extract the population from this position.
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        if self.has_right_child(index):
+            return self.heapStorage[self.get_right_child_index(index)].population
 
     def check_if_heap_is_full(self):
         """
@@ -245,8 +289,9 @@ class AbstractCityHeap(ABC):
 
             False   = Not full
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        return len(self.heapStorage) >= self.maximumHeapCapacity
 
     def swap_nodes(self, fst_node_index, sec_node_index):
         """

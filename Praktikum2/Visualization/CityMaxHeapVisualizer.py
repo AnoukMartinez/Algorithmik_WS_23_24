@@ -3,9 +3,9 @@ import random
 import math
 from typing import List
 
-from CityDataManagement.City import City
-from CityDataManagement.CityDataManager import CityDataManager
-from Visualization.HeatMapColorCreator import HeatMapColorCreator
+from Praktikum2.CityDataManagement.City import City
+from Praktikum2.CityDataManagement.CityDataManager import CityDataManager
+from Praktikum2.Visualization.HeatMapColorCreator import HeatMapColorCreator
 
 from bokeh.models import Circle, MultiLine
 from bokeh.plotting import figure, from_networkx, show

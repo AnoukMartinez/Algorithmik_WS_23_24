@@ -102,7 +102,13 @@ class CityMaxHeap(AbstractCityHeap):
 
         # get parent, watch left child and watch right child
         # if one bigger swap
-
+    def remove(self):
+        """
+        Remove a City from the Max-Heap
+        """
+        # TODO: implement me!
+        ...
+    '''
     def remove(self):
         """
         Remove a City from the Max-Heap
@@ -143,3 +149,4 @@ class CityMaxHeap(AbstractCityHeap):
         if self.currentHeapLastIndex > 0:
             print("now sort heap after remove")
             self.heapify_down_recursive(0)
+    '''

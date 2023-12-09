@@ -1,6 +1,7 @@
+import math
 from abc import ABC, abstractmethod
 from typing import List
-from CityDataManagement.City import City
+from Praktikum2.CityDataManagement.City import City
 
 
 class AbstractCityHeap(ABC):
@@ -115,11 +116,37 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me!
         ...
-
         if self.recursive:
-            self.heapify_up_recursive(self.currentHeapLastIndex - 1)
+            self.heapStorage.insert(self.currentHeapLastIndex, city)
+
+            for cit in self.heapStorage:
+                indes = self.heapStorage.index(cit)
+                if self.heapStorage[indes] != 0:
+                    self.currentHeapLastIndex = indes
+                    self.heapify_up_recursive(self.currentHeapLastIndex)
         else:
-            self.heapify_up_iterative()
+
+            self.heapStorage.insert(self.currentHeapLastIndex, city)
+
+            #   print("|||||||||||||||||||||||||||||||||||||||||||||||")
+            #   print(self.heapStorage[self.currentHeapLastIndex])
+            #   print(self.heapStorage[self.currentHeapLastIndex].name)
+            #   print(self.heapStorage[self.currentHeapLastIndex].population)
+            #   print(self.heapStorage[self.currentHeapLastIndex].country)
+            #   print("|||||||||||||||||||||||||||||||||||||||||||||||")
+
+            # self.heapify_up_iterative()
+
+            for cit in self.heapStorage:
+                indes = self.heapStorage.index(cit)
+                if self.heapStorage[indes] != 0:
+                    # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+                    #  print(indes)
+                    #  print("Meine Stadt heißt: ", self.heapStorage[indes])
+                    self.currentHeapLastIndex = indes
+                    #  print("my last index: ", self.currentHeapLastIndex)
+                    self.heapify_up_iterative()
 
     def build_heap_via_floyd(self):
         """
@@ -134,13 +161,16 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me!
         ...
+        return self.heapStorage[0].name
 
     def get_parent_index(self, index):
         """
         Return the index of the parent node. 
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        if index > 0:
+            return math.floor((index - 1) / 2)
 
     def get_left_child_index(self, index):
         """
@@ -164,8 +194,16 @@ class AbstractCityHeap(ABC):
 
             False   = No parent
         """
-        # TODO: implement me!
-        ...
+        # TODO: implement me! CHECK if FINISH
+
+        return index > 0 and math.floor((index - 1) / 2) >= 0
+
+        # try:
+        #    par_exist = index > 0 and self.heapStorage[math.floor((index-1)/2)]
+        #    print(index)
+        # except IndexError:
+        #    return False
+        # return par_exist
 
     def has_left_child(self, index):
         """
@@ -203,6 +241,7 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me!
         ...
+        return self.heapStorage[index].population
 
     def get_parent_population(self, index):
         """
@@ -254,6 +293,14 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me!
         ...
+
+        first = self.heapStorage[fst_node_index]
+        second = self.heapStorage[sec_node_index]
+
+        self.heapStorage[sec_node_index] = first
+        self.heapStorage[fst_node_index] = second
+
+        # print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
 
     def get_heap_data(self) -> List[City]:
         """

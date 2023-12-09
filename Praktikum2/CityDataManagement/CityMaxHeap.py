@@ -1,4 +1,8 @@
+from time import sleep
 from typing import List
+
+import numba
+
 from Praktikum2.CityDataManagement.City import City
 from Praktikum2.CityDataManagement.AbstractCityHeap import AbstractCityHeap
 
@@ -25,7 +29,7 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Establish heap conditions for a Max-Heap iterative upwards.
         """
-        # TODO: implement me! CHECK if correct
+        # TODO: implement me! CHECK if finish
         ...
 
         # get last inserted
@@ -47,19 +51,21 @@ class CityMaxHeap(AbstractCityHeap):
                self.heapStorage[self.get_parent_index(self.heapStorage.index(requested_node))].population):
             #    print(" ########## i have parent")
             parent_index = self.get_parent_index(self.heapStorage.index(requested_node))
-            #   print("current root bevore is: ", self.get_root_city())
-            #   print("my parent is: ", parent_index)
-            #   print("my parent name and poup: ", self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
-            #   print("my name and poup is: ", requested_node.name, " ", requested_node.population)
+            # print("current root bevore is: ", self.get_root_city(), " ", self.heapStorage[0].population)
+            # print("my parent is: ", parent_index)
+            # print("my parent name and poup: ", self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
+            # print("my name and poup is: ", requested_node.name, " ", requested_node.population)
             self.swap_nodes(parent_index, self.heapStorage.index(requested_node))
             requested_node = self.heapStorage[parent_index]
-        #   print("curent root after: ", self.get_root_city())
+            # print("curent root after: ", self.get_root_city(), " ", self.heapStorage[0].population)
+
+        # print("FROM INSERT ROOT IS HEAPIFY ite", self.get_root_city(), self.get_city_population(0))
 
     def heapify_up_recursive(self, index):
         """
         Establish heap conditions for a Max-Heap recursive upwards.
         """
-        # TODO: implement me! CHECK IF CORRECT
+        # TODO: implement me! CHECK IF finish
         ...
 
         # print("curent root bevore: ", self.get_root_city())
@@ -67,16 +73,22 @@ class CityMaxHeap(AbstractCityHeap):
         requwest_node = self.heapStorage[index]
         parent_index = 0
 
+        # print("curent root bevore: ", self.get_root_city(), " ", self.heapStorage[0].population)
+
         # rufe diese funktion selbst auf
         if self.has_parent(index) and index >= 0:
             parent_index = self.get_parent_index(index)
-            # print("recusive up index and city and popup: ", index, " ", requwest_node.name, " ", requwest_node.population)
-            # print("recusive up parent_index and parent_city and popup: ", parent_index, " ", self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
+            #    print("recusive up index and city and popup: ", index, " ", requwest_node.name, " ",
+            #  requwest_node.population)
+            #   print("recusive up parent_index and parent_city and popup: ", parent_index, " ",
+            # self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
+            if self.get_city_population(parent_index) < self.get_city_population(index):
+                self.swap_nodes(parent_index, index)
             self.heapify_up_recursive(parent_index)
 
-            self.swap_nodes(parent_index, index)
+        # print("curent root after: ", self.get_root_city(), " ", self.heapStorage[0].population)
 
-        # print("curent root after: ", self.get_root_city())
+        # print("FROM INSERT ROOT IS HEAPIFY rec", self.get_root_city(), self.get_city_population(0))
 
     def heapify_floyd(self, index, amount_of_cities):
         """
@@ -107,7 +119,7 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Remove a City from the Max-Heap
         """
-        # TODO: implement me!
+        # TODO: implement me! CHECK if FINISH
         ...
 
         removed_city = self.heapStorage[0]
@@ -117,14 +129,14 @@ class CityMaxHeap(AbstractCityHeap):
             if self.heapStorage[indes] != 0:
                 # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-                print(" ~~~~~~ ", indes)
-                print(" ~~~~~~ Meine Stadt heißt: ", self.heapStorage[indes].name)
+                # print(" ~~~~~~ ", indes)
+                # print(" ~~~~~~ Meine Stadt heißt: ", self.heapStorage[indes].name)
                 self.currentHeapLastIndex = indes
-                print("cur heap las in: ", self.currentHeapLastIndex)
+                # print("cur heap las in: ", self.currentHeapLastIndex)
 
-        print("curent root bevore: ", self.heapStorage[0])
+        # print("curent root bevore: ", self.heapStorage[0])
 
-        print("curent last bevore: ", self.heapStorage[self.currentHeapLastIndex])
+        # print("curent last bevore: ", self.heapStorage[self.currentHeapLastIndex])
 
         self.swap_nodes(0, self.currentHeapLastIndex)
         self.heapStorage.pop(self.currentHeapLastIndex)
@@ -134,13 +146,13 @@ class CityMaxHeap(AbstractCityHeap):
 
             indes = self.heapStorage.index(cit)
             if self.heapStorage[indes] != 0:
-                print(" ~~~~~~ ", indes)
-                print(" ~~~~~~ Meine Stadt 2 heißt: ", self.heapStorage[indes].name)
+                # print(" ~~~~~~ ", indes)
+                # print(" ~~~~~~ Meine Stadt 2 heißt: ", self.heapStorage[indes].name)
                 self.currentHeapLastIndex = indes
-                print("cur heap 2 las in: ", self.currentHeapLastIndex)
+                # print("cur heap 2 las in: ", self.currentHeapLastIndex)
 
-        print("curent root after: ", self.heapStorage[0])
-        print("curent last after: ", self.heapStorage[self.currentHeapLastIndex])
+        # print("curent root after: ", self.heapStorage[0])
+        # print("curent last after: ", self.heapStorage[self.currentHeapLastIndex])
 
         if self.currentHeapLastIndex > 0:
             print("now sort heap after remove")

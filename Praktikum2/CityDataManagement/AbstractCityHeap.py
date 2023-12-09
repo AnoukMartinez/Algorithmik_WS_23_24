@@ -114,8 +114,7 @@ class AbstractCityHeap(ABC):
         """
         Insert a single City into the Heap.
         """
-        # TODO: implement me!
-        ...
+        self.heapStorage.append(city)
 
         if self.recursive:
             self.heapify_up_recursive(self.currentHeapLastIndex - 1)

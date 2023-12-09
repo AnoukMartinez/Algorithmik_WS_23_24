@@ -16,7 +16,7 @@ class CityDataImporter:
         # Project Location
         project_dir = os.path.dirname(os.path.realpath('__file__'))
         # Modul Location
-        module_name = "CityDataImport"
+        module_name = "./Praktikum2/CityDataImport"
         # Name of File
         file_name = "cities.tsv"
         path_to_file = os.path.join(project_dir, module_name, file_name)

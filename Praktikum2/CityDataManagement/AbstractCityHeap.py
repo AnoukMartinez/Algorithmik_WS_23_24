@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 from CityDataManagement.City import City
+import math
 
 
 class AbstractCityHeap(ABC):
@@ -132,128 +133,107 @@ class AbstractCityHeap(ABC):
         """
         Return the City at the Root
         """
-        # TODO: implement me!
-        ...
+        return self.heapStorage[0]
 
     def get_parent_index(self, index):
         """
         Return the index of the parent node. 
         """
-        # TODO: implement me!
-        ...
+        if index == 0:
+            return None
+        else:
+            parent_index = (index - 1) / 2
+            return math.floor(parent_index)
 
     def get_left_child_index(self, index):
         """
         Return the index of the left child. 
         """
-        # TODO: implement me!
-        ...
+        left_child_index = 2 * index + 1
+        if left_child_index < self.maximumHeapCapacity:
+            return left_child_index
+        else: return None
 
     def get_right_child_index(self, index):
         """
         Return the index of the right child. 
         """
-        # TODO: implement me!
-        ...
+        right_child_index = 2 * index + 2
+        if right_child_index < self.maximumHeapCapacity:
+            return right_child_index
+        else: return None
 
     def has_parent(self, index) -> bool:
         """
         Check if the node has a parent. Return:
-
             True    = Has parent
-
             False   = No parent
         """
-        # TODO: implement me!
-        ...
+        return index != 0
 
     def has_left_child(self, index):
         """
         Check if the Node has a left Child. Return:
-
             True    = Has leftChild
-
             False   = No leftChild
-
-        Hint:
-        -----
-        The Index of the Child can be used for this purpose.
         """
-        # TODO: implement me!
-        ...
+        if self.get_left_child_index(index) == None:
+            return False
+        else: return True
 
     def has_right_child(self, index):
         """
         Check if the Node has a right Child. Return:
-
             True    = Has rightChild
-
             False   = No rightChild
-
-        Hint:
-        -----
-        The Index of the Child can be used for this purpose.
         """
-        # TODO: implement me!
-        ...
+        if self.get_right_child_index(index) == None:
+            return False
+        else: return True
 
     def get_city_population(self, index):
         """
         Return the Population of a City with the given index in the heap.
         """
-        # TODO: implement me!
-        ...
+        return self.heapStorage[index].population
 
     def get_parent_population(self, index):
         """
         Returns the population of the parent.
-
-        Hint:
-        -----
-        We need the position of the parent in the StorageArray to extract the population from this position.
         """
-        # TODO: implement me!
-        ...
+        parent_index = self.get_parent_index(index)
+        self.get_city_population(parent_index)
 
     def get_left_child_population(self, index):
         """
         Return of the population of the left child.
-
-        Hint:
-        -----
-        We need the position of the child in the StorageArray to extract the population from this position.
         """
-        # TODO: implement me!
-        ...
+        left_child_index = self.get_left_child_index(index)
+        self.get_city_population(left_child_index)
 
     def get_right_child_population(self, index):
         """
-
         Return of the population of the right child.
-        Hint:
-        -----
-        We need the position of the child in the StorageArray to extract the population from this position.
         """
-        # TODO: implement me!
-        ...
+        right_child_index = self.get_right_child_index(index)
+        self.get_city_population(right_child_index)
 
     def check_if_heap_is_full(self):
         """
         Check if the heap has reached its maximum capacity. Return:
-
             True    = Full
-
             False   = Not full
         """
-        # TODO: implement me!
-        ...
+        if self.heapStorage.len >= self.maximumHeapCapacity:
+            return True
+        else: return False
 
     def swap_nodes(self, fst_node_index, sec_node_index):
         """
         Swap two nodes specified by their index.
         """
-        # TODO: implement me!
-        ...
+        self.heapStorage[fst_node_index], self.heapStorage[sec_node_index] =\
+        self.heapStorage[sec_node_index], self.heapStorage[fst_node_index]
 
     def get_heap_data(self) -> List[City]:
         """

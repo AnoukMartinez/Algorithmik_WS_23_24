@@ -74,7 +74,7 @@ class CityMaxHeap(AbstractCityHeap):
             # print("recusive up parent_index and parent_city and popup: ", parent_index, " ", self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
             self.heapify_up_recursive(parent_index)
 
-        self.swap_nodes(parent_index, index)
+            self.swap_nodes(parent_index, index)
 
         # print("curent root after: ", self.get_root_city())
 
@@ -102,19 +102,15 @@ class CityMaxHeap(AbstractCityHeap):
 
         # get parent, watch left child and watch right child
         # if one bigger swap
+
     def remove(self):
         """
         Remove a City from the Max-Heap
         """
         # TODO: implement me!
         ...
-    '''
-    def remove(self):
-        """
-        Remove a City from the Max-Heap
-        """
-        # TODO: implement me!
-        ...
+
+        removed_city = self.heapStorage[0]
 
         for cit in self.heapStorage:
             indes = self.heapStorage.index(cit)
@@ -134,7 +130,7 @@ class CityMaxHeap(AbstractCityHeap):
         self.heapStorage.pop(self.currentHeapLastIndex)
 
         for cit in self.heapStorage:
-           # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
             indes = self.heapStorage.index(cit)
             if self.heapStorage[indes] != 0:
@@ -149,4 +145,5 @@ class CityMaxHeap(AbstractCityHeap):
         if self.currentHeapLastIndex > 0:
             print("now sort heap after remove")
             self.heapify_down_recursive(0)
-    '''
+
+        return removed_city

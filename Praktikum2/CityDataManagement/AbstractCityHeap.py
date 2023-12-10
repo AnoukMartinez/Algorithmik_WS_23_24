@@ -146,10 +146,10 @@ class AbstractCityHeap(ABC):
         # TODO: implement me! CHECK if FINISH
         ...
         self.currentHeapLastIndex = self.currentHeapLastIndex + 1
-        for cit in self.rawCityData:
+        #for cit in self.rawCityData:
             # print(cit)
-            self.heapStorage.append(cit)
-            self.heapify_floyd(self.heapStorage.index(cit), self.heapStorage)
+            #self.heapStorage.append(cit)
+            #self.heapify_floyd(self.heapStorage.index(cit), self.heapStorage)
 
     def get_root_city(self):
         """

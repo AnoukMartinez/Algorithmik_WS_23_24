@@ -119,10 +119,23 @@ class AbstractCityHeap(ABC):
         if self.recursive:
             self.heapStorage.insert(self.currentHeapLastIndex, city)
             self.heapify_up_recursive(self.currentHeapLastIndex)
+            '''
+            if self.currentHeapLastIndex + 13 >= len(self.heapStorage):
+                print("_______________________________________________")
+                print("FROM RECURSIVE ROOT: ", self.heapStorage[0])
+                print("```````````````````````````````````````````````")
+            '''
 
         else:
             self.heapStorage.insert(self.currentHeapLastIndex, city)
             self.heapify_up_iterative()
+
+            '''
+            if self.currentHeapLastIndex + 13 >= len(self.heapStorage) - 1:
+                print("_______________________________________________")
+                print("FROM ITERATIVE ROOT: ", self.heapStorage[0])
+                print("```````````````````````````````````````````````")
+            '''
 
         self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 

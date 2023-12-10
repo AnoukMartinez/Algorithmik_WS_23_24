@@ -76,7 +76,7 @@ class CityMaxHeap(AbstractCityHeap):
         # TODO: implement me! CHECK IF finish
         ...
 
-        # print("curent root bevore: ", self.get_root_city())
+        print("curent root bevore: ", self.get_root_city())
 
         requwest_node = self.heapStorage[index]
         parent_index = 0
@@ -86,9 +86,9 @@ class CityMaxHeap(AbstractCityHeap):
         # rufe diese funktion selbst auf
         if self.has_parent(index) and index >= 0:
             parent_index = self.get_parent_index(index)
-            #    print("recusive up index and city and popup: ", index, " ", requwest_node.name, " ",
-            #  requwest_node.population)
-            #   print("recusive up parent_index and parent_city and popup: ", parent_index, " ",
+            # print("    recusive up index and city and popup: ", index, " ", requwest_node.name, " ",
+            # requwest_node.population)
+            # print("    recusive up parent_index and parent_city and popup: ", parent_index, " ",
             # self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
             if self.get_city_population(parent_index) < self.get_city_population(index):
                 self.swap_nodes(parent_index, index)

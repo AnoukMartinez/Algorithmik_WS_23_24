@@ -111,9 +111,6 @@ class AbstractCityHeap(ABC):
                 self.insert(i)
 
     def insert(self, city):
-
-
-
         """
         Insert a single City into the Heap.
         """
@@ -121,36 +118,16 @@ class AbstractCityHeap(ABC):
         ...
         if self.recursive:
             self.heapStorage.insert(self.currentHeapLastIndex, city)
-
-            for cit in self.heapStorage:
-                indes = self.heapStorage.index(cit)
-                if self.heapStorage[indes] != 0:
-                    self.currentHeapLastIndex = indes
-                    self.heapify_up_recursive(self.currentHeapLastIndex)
-        else:
-
-            self.heapStorage.insert(self.currentHeapLastIndex, city)
-
-            # print("|||ANFANG||||||||||||||||||||||||||||||||||||||||||||")
-            # print(self.currentHeapLastIndex)
-            # print(self.heapStorage[self.currentHeapLastIndex])
-            # print(self.heapStorage[self.currentHeapLastIndex].name)
-            # print(self.heapStorage[self.currentHeapLastIndex].population)
-            # print(self.heapStorage[self.currentHeapLastIndex].country)
-            # print("|||||||ENDE||||||||||||||||||||||||||||||||||||||||")
-            self.heapify_up_iterative()
-
-            # self.heapify_up_iterative()
-
+            self.heapify_up_recursive(self.currentHeapLastIndex)
             # for cit in self.heapStorage:
-            #    indes = self.heapStorage.index(cit)
-            #    if self.heapStorage[indes] != 0:
-            # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+                # indes = self.heapStorage.index(cit)
+                # if self.heapStorage[indes] != 0:
+                    # self.currentHeapLastIndex = indes
+                    # self.heapify_up_recursive(self.currentHeapLastIndex)
 
-            #  print(indes)
-            #  print("Meine Stadt heißt: ", self.heapStorage[indes])
-            #        self.currentHeapLastIndex = indes
-            #  print("my last index: ", self.currentHeapLastIndex)
+        else:
+            self.heapStorage.insert(self.currentHeapLastIndex, city)
+            self.heapify_up_iterative()
 
         self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 
@@ -160,7 +137,7 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me! CHECK if FINISH
         ...
-
+        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
         for cit in self.rawCityData:
             # print(cit)
             self.heapStorage.append(cit)

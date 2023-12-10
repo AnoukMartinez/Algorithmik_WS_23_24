@@ -109,6 +109,7 @@ class AbstractCityHeap(ABC):
         else:
             for i in self.rawCityData:
                 self.insert(i)
+                self.currentHeapLastIndex += 1
 
     def insert(self, city):
         """
@@ -125,8 +126,11 @@ class AbstractCityHeap(ABC):
         """
         Build a Heap via Floyds Heap Construction Algorithm from a unsorted List Of Cities.
         """
-        # TODO: implement me!
-        ...
+        for i in self.rawCityData:
+            self.heapStorage.append(i)
+
+        self.heapify_up_iterative()
+
 
     def get_root_city(self):
         """
@@ -223,7 +227,7 @@ class AbstractCityHeap(ABC):
             True    = Full
             False   = Not full
         """
-        if self.heapStorage.len >= self.maximumHeapCapacity:
+        if len(self.heapStorage) >= self.maximumHeapCapacity:
             return True
         else: return False
 

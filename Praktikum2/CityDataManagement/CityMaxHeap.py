@@ -25,8 +25,19 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Establish heap conditions for a Max-Heap iterative upwards.
         """
-        # TODO: implement me!
-        ...
+        current_index = len(self.heapStorage) - 1 # Wir wollen unten rechts anfangen
+
+        while current_index >= 0: # Inkludiert Root Node. Sollte die inkludiert werden? Ich denke ja?
+            parent_index = self.get_parent_index(current_index)
+
+            node_population = self.heapStorage[current_index]
+            parent_population = self.heapStorage[parent_index]
+
+            if node_population > parent_population:
+                self.swap_nodes(current_index, parent_index)
+                current_index = parent_index
+            else:
+                break # Sonst: Nicht mehr größer als, kann terminieren
 
     def heapify_up_recursive(self, index):
         """

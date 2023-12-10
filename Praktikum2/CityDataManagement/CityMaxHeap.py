@@ -49,15 +49,23 @@ class CityMaxHeap(AbstractCityHeap):
         # check if node had parent
         while (self.has_parent(self.heapStorage.index(requested_node)) and requested_node.population >
                self.heapStorage[self.get_parent_index(self.heapStorage.index(requested_node))].population):
-            #    print(" ########## i have parent")
+            # print(" ########## i have parent")
             parent_index = self.get_parent_index(self.heapStorage.index(requested_node))
-            # print("current root bevore is: ", self.get_root_city(), " ", self.heapStorage[0].population)
-            # print("my parent is: ", parent_index)
-            # print("my parent name and poup: ", self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
-            # print("my name and poup is: ", requested_node.name, " ", requested_node.population)
-            self.swap_nodes(parent_index, self.heapStorage.index(requested_node))
-            requested_node = self.heapStorage[parent_index]
-            # print("curent root after: ", self.get_root_city(), " ", self.heapStorage[0].population)
+            # print("    current root bevore is: ", self.get_root_city(), " ", self.heapStorage[0].population)
+            # print("    my parent INDEX is: ", parent_index)
+            # print("    my parent INDEX is: ", self.heapStorage[parent_index])
+
+            # print("    my parent name and poup: ", self.heapStorage[parent_index].name, " ", self.heapStorage[parent_index].population)
+            # print("    my name and poup is: ", requested_node.name, " ", requested_node.population)
+
+            my_index = self.heapStorage.index(requested_node)
+            # print("    my INDEX is: ", my_index, " ", self.heapStorage[my_index].name)
+            # print("    my INDEX is: ", self.heapStorage[my_index])
+            # print("    my name and poup is: ", requested_node.name, " ", requested_node.population)
+
+            self.swap_nodes(parent_index, my_index)
+
+            # print("    current root after: ", self.get_root_city(), " ", self.heapStorage[0].population)
 
         # print("FROM INSERT ROOT IS HEAPIFY ite", self.get_root_city(), self.get_city_population(0))
 
@@ -95,15 +103,17 @@ class CityMaxHeap(AbstractCityHeap):
         Establish heap conditions for a Max-Heap via Floyds Heap Construction Algorithmus.
         
         """
-        # TODO: implement me!
+        # TODO: implement me! CHECK if FINISH
         ...
 
         biggest_child = None
 
-        if self.has_left_child(index) and self.get_city_population(self.get_left_child_index(index)) > self.get_city_population(index):
+        if self.has_left_child(index) and self.get_city_population(
+                self.get_left_child_index(index)) > self.get_city_population(index):
             biggest_child = self.heapStorage[self.get_left_child_index(index)]
 
-        if self.has_right_child(index) and self.get_city_population(self.get_right_child_index(index)) > self.get_city_population(index):
+        if self.has_right_child(index) and self.get_city_population(
+                self.get_right_child_index(index)) > self.get_city_population(index):
             biggest_child = self.heapStorage[self.get_right_child_index(index)]
 
         if biggest_child is not None:
@@ -116,7 +126,6 @@ class CityMaxHeap(AbstractCityHeap):
             if self.heapStorage[0] is int:
                 # print(el.name, " ", el.population)
                 print("curent root after: ", self.get_root_city(), " ", self.heapStorage[0].population)
-
 
     def heapify_down_iterative(self):
         """

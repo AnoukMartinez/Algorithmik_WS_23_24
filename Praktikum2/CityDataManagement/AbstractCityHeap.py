@@ -111,6 +111,9 @@ class AbstractCityHeap(ABC):
                 self.insert(i)
 
     def insert(self, city):
+
+
+
         """
         Insert a single City into the Heap.
         """
@@ -128,38 +131,40 @@ class AbstractCityHeap(ABC):
 
             self.heapStorage.insert(self.currentHeapLastIndex, city)
 
-            #   print("|||||||||||||||||||||||||||||||||||||||||||||||")
-            #   print(self.heapStorage[self.currentHeapLastIndex])
-            #   print(self.heapStorage[self.currentHeapLastIndex].name)
-            #   print(self.heapStorage[self.currentHeapLastIndex].population)
-            #   print(self.heapStorage[self.currentHeapLastIndex].country)
-            #   print("|||||||||||||||||||||||||||||||||||||||||||||||")
+            # print("|||ANFANG||||||||||||||||||||||||||||||||||||||||||||")
+            # print(self.currentHeapLastIndex)
+            # print(self.heapStorage[self.currentHeapLastIndex])
+            # print(self.heapStorage[self.currentHeapLastIndex].name)
+            # print(self.heapStorage[self.currentHeapLastIndex].population)
+            # print(self.heapStorage[self.currentHeapLastIndex].country)
+            # print("|||||||ENDE||||||||||||||||||||||||||||||||||||||||")
+            self.heapify_up_iterative()
 
             # self.heapify_up_iterative()
 
-            for cit in self.heapStorage:
-                indes = self.heapStorage.index(cit)
-                if self.heapStorage[indes] != 0:
-                    # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            # for cit in self.heapStorage:
+            #    indes = self.heapStorage.index(cit)
+            #    if self.heapStorage[indes] != 0:
+            # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-                    #  print(indes)
-                    #  print("Meine Stadt heißt: ", self.heapStorage[indes])
-                    self.currentHeapLastIndex = indes
-                    #  print("my last index: ", self.currentHeapLastIndex)
-                    self.heapify_up_iterative()
+            #  print(indes)
+            #  print("Meine Stadt heißt: ", self.heapStorage[indes])
+            #        self.currentHeapLastIndex = indes
+            #  print("my last index: ", self.currentHeapLastIndex)
+
+        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 
     def build_heap_via_floyd(self):
         """
         Build a Heap via Floyds Heap Construction Algorithm from a unsorted List Of Cities.
         """
-        # TODO: implement me!
+        # TODO: implement me! CHECK if FINISH
         ...
 
         for cit in self.rawCityData:
             # print(cit)
             self.heapStorage.append(cit)
             self.heapify_floyd(self.heapStorage.index(cit), self.heapStorage)
-
 
     def get_root_city(self):
         """
@@ -174,9 +179,10 @@ class AbstractCityHeap(ABC):
         Return the index of the parent node.
         """
         # TODO: implement me! CHECK if FINISH
-
         if index > 0:
             return math.floor((index - 1) / 2)
+        elif index == 0:
+            return 0
 
     def get_left_child_index(self, index):
         """
@@ -213,7 +219,6 @@ class AbstractCityHeap(ABC):
             False   = No parent
         """
         # TODO: implement me! CHECK if FINISH
-
         return index > 0 and math.floor((index - 1) / 2) >= 0
 
         # try:
@@ -331,8 +336,16 @@ class AbstractCityHeap(ABC):
         first = self.heapStorage[fst_node_index]
         second = self.heapStorage[sec_node_index]
 
+        # print("```````````````````````````````````````````````````````````")
+        # print("first index: ", fst_node_index, " first: ", first.name)
+        # print("second index: ", sec_node_index, " second: ", second.name)
+
         self.heapStorage[sec_node_index] = first
         self.heapStorage[fst_node_index] = second
+
+        # print("new index first: ", fst_node_index, " ", self.heapStorage[fst_node_index].name)
+        # print("new index second: ", sec_node_index, " ", self.heapStorage[sec_node_index].name)
+        # print("````````````````````````````````````````````````````````````")
 
         # print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
 

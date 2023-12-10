@@ -76,7 +76,7 @@ class CityMaxHeap(AbstractCityHeap):
         # TODO: implement me! CHECK IF finish
         ...
 
-        print("curent root bevore: ", self.get_root_city())
+        # print("curent root bevore: ", self.get_root_city())
 
         requwest_node = self.heapStorage[index]
         parent_index = 0

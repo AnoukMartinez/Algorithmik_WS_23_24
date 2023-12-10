@@ -119,11 +119,6 @@ class AbstractCityHeap(ABC):
         if self.recursive:
             self.heapStorage.insert(self.currentHeapLastIndex, city)
             self.heapify_up_recursive(self.currentHeapLastIndex)
-            # for cit in self.heapStorage:
-                # indes = self.heapStorage.index(cit)
-                # if self.heapStorage[indes] != 0:
-                    # self.currentHeapLastIndex = indes
-                    # self.heapify_up_recursive(self.currentHeapLastIndex)
 
         else:
             self.heapStorage.insert(self.currentHeapLastIndex, city)

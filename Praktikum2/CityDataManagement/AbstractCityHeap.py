@@ -148,13 +148,18 @@ class AbstractCityHeap(ABC):
                     #  print("my last index: ", self.currentHeapLastIndex)
                     self.heapify_up_iterative()
 
-
     def build_heap_via_floyd(self):
         """
         Build a Heap via Floyds Heap Construction Algorithm from a unsorted List Of Cities.
         """
         # TODO: implement me!
         ...
+
+        for cit in self.rawCityData:
+            # print(cit)
+            self.heapStorage.append(cit)
+            self.heapify_floyd(self.heapStorage.index(cit), self.heapStorage)
+
 
     def get_root_city(self):
         """

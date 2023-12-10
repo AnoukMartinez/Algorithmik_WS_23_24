@@ -98,6 +98,26 @@ class CityMaxHeap(AbstractCityHeap):
         # TODO: implement me!
         ...
 
+        biggest_child = None
+
+        if self.has_left_child(index) and self.get_city_population(self.get_left_child_index(index)) > self.get_city_population(index):
+            biggest_child = self.heapStorage[self.get_left_child_index(index)]
+
+        if self.has_right_child(index) and self.get_city_population(self.get_right_child_index(index)) > self.get_city_population(index):
+            biggest_child = self.heapStorage[self.get_right_child_index(index)]
+
+        if biggest_child is not None:
+            self.swap_nodes(self.heapStorage.index(biggest_child), index)
+
+        if index >= 0 and biggest_child is not None:
+            self.heapify_floyd(self.heapStorage.index(biggest_child), amount_of_cities)
+
+        for el in self.heapStorage:
+            if self.heapStorage[0] is int:
+                # print(el.name, " ", el.population)
+                print("curent root after: ", self.get_root_city(), " ", self.heapStorage[0].population)
+
+
     def heapify_down_iterative(self):
         """
         Establish heap conditions for a Max-Heap iterative downwards.

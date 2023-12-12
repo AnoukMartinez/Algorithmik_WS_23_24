@@ -21,17 +21,19 @@ class HeapCreationAssembler:
         # Creation of the given data structure for this course.
         city_data = self.importer.import_from_file()
 
+        '''
         # create Max Heap and measure Execution Time Iterative
         self.executionTimeAnalyser.start()
         self.cityDataManager.create_new_max_city_heap(city_data, False, False)
         self.executionTimeAnalyser.stop("MaxHeap Execution time Iterative: ")
-
         '''
+
         # create Max Heap and measure Execution Time Recursive
         self.executionTimeAnalyser.start()
         self.cityDataManager.create_new_max_city_heap(city_data, True, False)
         self.executionTimeAnalyser.stop("MaxHeap Execution time Recursive: ")
-
+        
+        '''
         # create Max Heap and measure Execution Time for Floyds Algorithm
         self.executionTimeAnalyser.start()
         self.cityDataManager.create_new_max_city_heap(city_data, True, True)

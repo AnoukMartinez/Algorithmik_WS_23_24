@@ -47,8 +47,17 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Establish heap conditions for a Max-Heap recursive upwards.
         """
-        # TODO: implement me!
-        ...
+        if index == 0:
+            return
+        
+        parent_index = self.get_parent_index(index)
+        
+        node_population = self.heapStorage[index].population
+        parent_population = self.heapStorage[parent_index].population
+
+        if node_population > parent_population:   
+            self.swap_nodes(index, parent_index)
+            self.heapify_up_recursive(parent_index)
 
     def heapify_floyd(self, index, amount_of_cities):
         """

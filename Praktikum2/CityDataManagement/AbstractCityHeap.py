@@ -109,13 +109,19 @@ class AbstractCityHeap(ABC):
         else:
             for i in self.rawCityData:
                 self.insert(i)
-                self.currentHeapLastIndex += 1
+                
 
     def insert(self, city):
         """
         Insert a single City into the Heap.
         """
-        self.heapStorage.append(city)
+        try:
+            self.heapStorage[self.currentHeapLastIndex] = city
+        except: 
+            print("heap full")
+            return
+
+        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 
         if self.recursive:
             self.heapify_up_recursive(self.currentHeapLastIndex - 1)
@@ -198,6 +204,8 @@ class AbstractCityHeap(ABC):
         """
         Return the Population of a City with the given index in the heap.
         """
+        if(self.heapStorage[index] == 0):
+            return None
         return self.heapStorage[index].population
 
     def get_parent_population(self, index):

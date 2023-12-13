@@ -71,19 +71,69 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Establish heap conditions for a Max-Heap iterative downwards.
         """
-        # TODO: implement me!
-        ...
+        root_node = self.heapStorage[0]
+        last_node = self.heapStorage[self.currentHeapLastIndex]
+
+        # Tausche erste und letzte Node
+        self.swap_nodes(root_node, last_node)
+        self.heapStorage[self.currentHeapLastIndex] = 0
+
+        root_node = last_node # Setze Referenz von root Node auf new root
+        
+        while self.has_left_child(root_node) or self.has_right_child(root_node):
+            if self.has_left_child(root_node):
+                left_child = self.get_left_child_index(root_node)
+            if self.has_right_child(root_node):
+                right_child = self.get_right_child_index(root_node)
+
+            smaller_child = 0 # Instanziiere smallerchild (KA ob man das braucht aber paranoia)
+
+            if left_child.population < right_child.population:
+                smaller_child = right_child
+            else:
+                smaller_child = left_child
+            
+            if root_node.population > smaller_child:
+                return # Heap Invariante ist wieder hergestellt
+            
+            root_node = smaller_child
+            
 
     def heapify_down_recursive(self, index):
         """
         Establish heap conditions for a Max-Heap recursive downwards.
         """
-        # TODO: implement me!
-        ...
+        if index == 0: # Alternativ if self.has_parent(index) oder so
+            root_node = self.heapStorage[index]
+            last_node = self.heapStorage[self.currentHeapLastIndex]
+
+            self.swap_nodes(root_node, last_node) # Tausche erste und letzte Node
+            self.heapStorage[self.currentHeapLastIndex] = 0 # Lösche letzten Eintrag
+        
+        if self.has_left_child(index):
+            left_child_index = self.get_left_child_index(index)
+        if self.has_right_child(index):
+            right_child_index = self.get_right_child_index(index)
+
+        smaller_child_index = None # Instanziiere smallerchild (KA ob man das braucht aber paranoia)
+        if left_child_index.population < right_child_index.population:
+            smaller_child_index = right_child_index
+        else:
+            smaller_child_index = left_child_index
+        
+        if root_node.population > smaller_child_index:
+            return # Heap Invariante ist wieder hergestellt. Base Case...?
+        else:
+            self.swap_nodes(index, smaller_child_index)
+            self.heapify_down_recursive(smaller_child_index)
+        
 
     def remove(self):
         """
         Remove a City from the Max-Heap
         """
-        # TODO: implement me!
-        ...
+        # Die "City" in Frage die hier removed wird ist übrigens immer die root node.
+        if self.recursive:
+            self.heapify_down_recursive(self.heapStorage[0])
+        else:
+            self.heapify_down_iterative()

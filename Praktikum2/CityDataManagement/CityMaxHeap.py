@@ -68,19 +68,18 @@ class CityMaxHeap(AbstractCityHeap):
         index: falls das ganze rekursiv implementiert wird (Ich habs iterativ gemacht weil es 
         generell keine Vorgabe dazu gibt)
         amount of cities: gleich maxHeapIndex, brauchen wir weil wir ja hinten anfangen wollen
-
-        Ungefähr:
-        i = maxHeapIndex # Hinten anfangen
-        while i < 0:
-            # Percolatedown = check node values, then swap if necessary
-            currentnode = heapStorage[i]
-            parentnode = heapStorage[currentnode.getparentindex]
-
-            if currentnode.population > parentnode.population:
-                swap(currentnode, parentnode)
-            
-            i -= 1
         '''
+        # i könnte auch = amount_of_cities sein.
+        i = self.currentHeapLastIndex # Wir wollen mit der letzten Node anfangen
+        while i < 0: # Solange bis root Node erreicht ist. root muss ja nicht geswapt werden
+            # Percolatedown = check node values, then swap if necessary
+            current_node = self.heapStorage[i]
+            parentnode = self.heapStorage[self.get_parent_index(current_node)]
+
+            if current_node.population > parentnode.population:
+                self.swap_nodes(current_node, parentnode)
+            
+            i = i - 1
 
     def heapify_down_iterative(self):
         """

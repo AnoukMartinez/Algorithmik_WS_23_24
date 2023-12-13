@@ -64,8 +64,23 @@ class CityMaxHeap(AbstractCityHeap):
         Establish heap conditions for a Max-Heap via Floyds Heap Construction Algorithmus.
         
         """
-        # TODO: implement me!
-        ...
+        '''
+        index: falls das ganze rekursiv implementiert wird (Ich habs iterativ gemacht weil es 
+        generell keine Vorgabe dazu gibt)
+        amount of cities: gleich maxHeapIndex, brauchen wir weil wir ja hinten anfangen wollen
+
+        Ungefähr:
+        i = maxHeapIndex # Hinten anfangen
+        while i < 0:
+            # Percolatedown = check node values, then swap if necessary
+            currentnode = heapStorage[i]
+            parentnode = heapStorage[currentnode.getparentindex]
+
+            if currentnode.population > parentnode.population:
+                swap(currentnode, parentnode)
+            
+            i -= 1
+        '''
 
     def heapify_down_iterative(self):
         """

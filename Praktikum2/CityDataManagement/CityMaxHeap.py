@@ -103,7 +103,7 @@ class CityMaxHeap(AbstractCityHeap):
         Establish heap conditions for a Max-Heap via Floyds Heap Construction Algorithmus.
         
         """
-        # TODO: implement me! CHECK if FINISH
+        # TODO: implement me! REWORK MUST BE DONE !!!!!!
         ...
 
         biggest_child = None

@@ -116,28 +116,29 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me! CHECK if FINISH
         ...
-        if self.recursive:
-            self.heapStorage.insert(self.currentHeapLastIndex, city)
-            self.heapify_up_recursive(self.currentHeapLastIndex)
-            '''
-            if self.currentHeapLastIndex + 13 >= len(self.heapStorage):
-                print("_______________________________________________")
-                print("FROM RECURSIVE ROOT: ", self.heapStorage[0])
-                print("```````````````````````````````````````````````")
-            '''
+        if self.check_if_heap_is_full() is False:
+            if self.recursive:
+                self.heapStorage[self.currentHeapLastIndex] = city
+                self.heapify_up_recursive(self.currentHeapLastIndex)
+                '''
+                if self.currentHeapLastIndex + 13 >= len(self.heapStorage):
+                    print("_______________________________________________")
+                    print("FROM RECURSIVE ROOT: ", self.heapStorage[0])
+                    print("```````````````````````````````````````````````")
+                '''
 
-        else:
-            self.heapStorage.insert(self.currentHeapLastIndex, city)
-            self.heapify_up_iterative()
+            else:
+                self.heapStorage[self.currentHeapLastIndex] = city
+                self.heapify_up_iterative()
 
-            '''
-            if self.currentHeapLastIndex + 13 >= len(self.heapStorage) - 1:
-                print("_______________________________________________")
-                print("FROM ITERATIVE ROOT: ", self.heapStorage[0])
-                print("```````````````````````````````````````````````")
-            '''
+                '''
+                if self.currentHeapLastIndex + 13 >= len(self.heapStorage) - 1:
+                    print("_______________________________________________")
+                    print("FROM ITERATIVE ROOT: ", self.heapStorage[0])
+                    print("```````````````````````````````````````````````")
+                '''
 
-        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
+            self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 
     def build_heap_via_floyd(self):
         """
@@ -228,10 +229,10 @@ class AbstractCityHeap(ABC):
         # TODO: implement me! CHECK if FINISH
 
         try:
-            self.heapStorage[((2 * index) + 1)]
+            has_child = not isinstance(self.heapStorage[((2 * index) + 1)], int)
         except IndexError:
             return False
-        return True
+        return has_child
 
     def has_right_child(self, index):
         """
@@ -248,10 +249,10 @@ class AbstractCityHeap(ABC):
         # TODO: implement me! CHECK if FINISH
 
         try:
-            self.heapStorage[((2 * index) + 2)]
+            has_child = not isinstance(self.heapStorage[((2 * index) + 12)], int)
         except IndexError:
             return False
-        return True
+        return has_child
 
     def get_city_population(self, index):
         """
@@ -308,8 +309,9 @@ class AbstractCityHeap(ABC):
 
             False   = Not full
         """
-        # TODO: implement me!
+        # TODO: implement me! CHECK if FINISH
         ...
+        return self.currentHeapLastIndex > self.maximumHeapCapacity
 
     def swap_nodes(self, fst_node_index, sec_node_index):
         """
@@ -321,18 +323,8 @@ class AbstractCityHeap(ABC):
         first = self.heapStorage[fst_node_index]
         second = self.heapStorage[sec_node_index]
 
-        # print("```````````````````````````````````````````````````````````")
-        # print("first index: ", fst_node_index, " first: ", first.name)
-        # print("second index: ", sec_node_index, " second: ", second.name)
-
         self.heapStorage[sec_node_index] = first
         self.heapStorage[fst_node_index] = second
-
-        # print("new index first: ", fst_node_index, " ", self.heapStorage[fst_node_index].name)
-        # print("new index second: ", sec_node_index, " ", self.heapStorage[sec_node_index].name)
-        # print("````````````````````````````````````````````````````````````")
-
-        # print("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
 
     def get_heap_data(self) -> List[City]:
         """

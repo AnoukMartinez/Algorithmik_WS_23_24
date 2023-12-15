@@ -120,23 +120,10 @@ class AbstractCityHeap(ABC):
             if self.recursive:
                 self.heapStorage[self.currentHeapLastIndex] = city
                 self.heapify_up_recursive(self.currentHeapLastIndex)
-                '''
-                if self.currentHeapLastIndex + 13 >= len(self.heapStorage):
-                    print("_______________________________________________")
-                    print("FROM RECURSIVE ROOT: ", self.heapStorage[0])
-                    print("```````````````````````````````````````````````")
-                '''
 
             else:
                 self.heapStorage[self.currentHeapLastIndex] = city
                 self.heapify_up_iterative()
-
-                '''
-                if self.currentHeapLastIndex + 13 >= len(self.heapStorage) - 1:
-                    print("_______________________________________________")
-                    print("FROM ITERATIVE ROOT: ", self.heapStorage[0])
-                    print("```````````````````````````````````````````````")
-                '''
 
             self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 
@@ -146,11 +133,12 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me! CHECK if FINISH
         ...
-        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
-        #for cit in self.rawCityData:
-            # print(cit)
-            #self.heapStorage.append(cit)
-            #self.heapify_floyd(self.heapStorage.index(cit), self.heapStorage)
+        for city in self.rawCityData:
+            if self.check_if_heap_is_full() is False:
+                self.heapStorage[self.currentHeapLastIndex] = city
+                self.currentHeapLastIndex = self.currentHeapLastIndex + 1
+
+        self.heapify_floyd(self.currentHeapLastIndex, 0)
 
     def get_root_city(self):
         """
@@ -229,7 +217,9 @@ class AbstractCityHeap(ABC):
         # TODO: implement me! CHECK if FINISH
 
         try:
-            has_child = not isinstance(self.heapStorage[((2 * index) + 1)], int)
+            has_child = isinstance(self.heapStorage[((2 * index) + 1)], City)
+            # print("has left child: ", has_child)
+
         except IndexError:
             return False
         return has_child
@@ -249,7 +239,8 @@ class AbstractCityHeap(ABC):
         # TODO: implement me! CHECK if FINISH
 
         try:
-            has_child = not isinstance(self.heapStorage[((2 * index) + 12)], int)
+            has_child = isinstance(self.heapStorage[((2 * index) + 2)], City)
+            # print("has right child: ", has_child)
         except IndexError:
             return False
         return has_child

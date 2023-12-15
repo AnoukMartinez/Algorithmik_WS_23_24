@@ -106,26 +106,54 @@ class CityMaxHeap(AbstractCityHeap):
         # TODO: implement me! REWORK MUST BE DONE !!!!!!
         ...
 
-        biggest_child = None
+        # 1. last level has no cildren, so that is corrctly sorted
+        is_sorted = False
 
-        if self.has_left_child(index) and self.get_city_population(
-                self.get_left_child_index(index)) > self.get_city_population(index):
-            biggest_child = self.heapStorage[self.get_left_child_index(index)]
+        while (index >= 0) and (is_sorted is False):
+            # print(index)
+            # check if left child AND right child is FALSE (not (true or true))
+            while not (self.has_left_child(index) or self.has_right_child(index)):
+                index = index - 1
 
-        if self.has_right_child(index) and self.get_city_population(
-                self.get_right_child_index(index)) > self.get_city_population(index):
-            biggest_child = self.heapStorage[self.get_right_child_index(index)]
+            is_sorted = True
 
-        if biggest_child is not None:
-            self.swap_nodes(self.heapStorage.index(biggest_child), index)
+            # without a left child no right child should be existed
+            # so check for left child exist
+            if self.has_left_child(index):
+                # left child exist
+                # check if right child exist
+                #   and right child population is bigger the left child
+                if (self.has_right_child(index) and
+                        self.get_right_child_population(index) > self.get_left_child_population(index)):
+                    # now check of current (parent) population is bigger than right child
+                    if self.get_city_population(index) < self.get_right_child_population(index):
+                        # if true, then swap nodes
+                        self.swap_nodes(index, self.get_right_child_index(index))
+                        # because of swap set index to last, so that while loop repeat
+                        # index = self.currentHeapLastIndex
+                        is_sorted = False
 
-        if index >= 0 and biggest_child is not None:
-            self.heapify_floyd(self.heapStorage.index(biggest_child), amount_of_cities)
 
-        for el in self.heapStorage:
-            if self.heapStorage[0] is int:
-                # print(el.name, " ", el.population)
-                print("curent root after: ", self.get_root_city(), " ", self.heapStorage[0].population)
+                    # Here, the right child population is smaller than current (parent) population
+                    else:
+                        #   so reduce index -1 for next round in while loop
+                        index = index - 1
+                        is_sorted = False
+
+                # Here current (parent) has no right child
+                #   or current (parent) right child is smaller than left child
+                else:
+                    # check if current (parent) left population is bigger than current (parent) population
+                    if self.get_city_population(index) < self.get_left_child_population(index):
+                        # if true, then swap nodes
+                        self.swap_nodes(index, self.get_left_child_index(index))
+                        # because of swap set index to last, so that while loop repeat
+                        # index = self.currentHeapLastIndex
+                        is_sorted = False
+                    else:
+                        index = index - 1
+                        is_sorted = False
+
 
     def heapify_down_iterative(self):
         """

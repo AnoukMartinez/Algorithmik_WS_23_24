@@ -18,7 +18,7 @@ class CityDataImporter:
         # Modul Location
         module_name = "CityDataImport"
         # Name of File
-        file_name = "cities.tsv"
+        file_name = "cities_v5.tsv"
         path_to_file = os.path.join(project_dir, module_name, file_name)
 
         return path_to_file

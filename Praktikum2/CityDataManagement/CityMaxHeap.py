@@ -78,9 +78,6 @@ class CityMaxHeap(AbstractCityHeap):
 
         # print("curent root bevore: ", self.get_root_city())
 
-        requwest_node = self.heapStorage[index]
-        parent_index = 0
-
         # print("curent root bevore: ", self.get_root_city(), " ", self.heapStorage[0].population)
 
         # rufe diese funktion selbst auf
@@ -101,58 +98,21 @@ class CityMaxHeap(AbstractCityHeap):
     def heapify_floyd(self, index, amount_of_cities):
         """
         Establish heap conditions for a Max-Heap via Floyds Heap Construction Algorithmus.
-        
+
         """
         # TODO: implement me! REWORK MUST BE DONE !!!!!!
         ...
+        last_leaf_index = index
 
-        # 1. last level has no cildren, so that is corrctly sorted
-        is_sorted = False
+        # Find the last leaf node with children
+        while last_leaf_index >= 0 and not (self.has_left_child(last_leaf_index) or self.has_right_child(last_leaf_index)):
+            last_leaf_index -= 1
 
-        while (index >= 0) and (is_sorted is False):
-            # print(index)
-            # check if left child AND right child is FALSE (not (true or true))
-            while not (self.has_left_child(index) or self.has_right_child(index)):
-                index = index - 1
+        # Start building the heap from the last non-leaf node
+        for index in range(last_leaf_index, -1, -1):
+            #self.heapify_down_recursive(index)
 
-            is_sorted = True
-
-            # without a left child no right child should be existed
-            # so check for left child exist
-            if self.has_left_child(index):
-                # left child exist
-                # check if right child exist
-                #   and right child population is bigger the left child
-                if (self.has_right_child(index) and
-                        self.get_right_child_population(index) > self.get_left_child_population(index)):
-                    # now check of current (parent) population is bigger than right child
-                    if self.get_city_population(index) < self.get_right_child_population(index):
-                        # if true, then swap nodes
-                        self.swap_nodes(index, self.get_right_child_index(index))
-                        # because of swap set index to last, so that while loop repeat
-                        # index = self.currentHeapLastIndex
-                        is_sorted = False
-
-
-                    # Here, the right child population is smaller than current (parent) population
-                    else:
-                        #   so reduce index -1 for next round in while loop
-                        index = index - 1
-                        is_sorted = False
-
-                # Here current (parent) has no right child
-                #   or current (parent) right child is smaller than left child
-                else:
-                    # check if current (parent) left population is bigger than current (parent) population
-                    if self.get_city_population(index) < self.get_left_child_population(index):
-                        # if true, then swap nodes
-                        self.swap_nodes(index, self.get_left_child_index(index))
-                        # because of swap set index to last, so that while loop repeat
-                        # index = self.currentHeapLastIndex
-                        is_sorted = False
-                    else:
-                        index = index - 1
-                        is_sorted = False
+            self.heapify_down_iterative()
 
 
     def heapify_down_iterative(self):
@@ -162,6 +122,33 @@ class CityMaxHeap(AbstractCityHeap):
         # TODO: implement me!
         ...
 
+        heap_size = len(self.heapStorage)
+
+        # Start from the last non-leaf node and go up to the root
+        for index in range((heap_size // 2) - 1, -1, -1):
+            while True:
+                largest = index
+                left_child_index = 2 * index + 1
+                right_child_index = 2 * index + 2
+
+                # Check if left child exists and is greater than the current largest
+                if left_child_index < heap_size and self.heapStorage[left_child_index] > self.heapStorage[largest]:
+                    largest = left_child_index
+
+                # Check if right child exists and is greater than the current largest
+                if right_child_index < heap_size and self.heapStorage[right_child_index] > self.heapStorage[largest]:
+                    largest = right_child_index
+
+                # If the largest element is the current element, no swap is needed
+                if largest == index:
+                    break
+
+                # Swap the current node with the largest child
+                self.swap_nodes(index, largest)
+
+                # Update the index for the next iteration
+                index = largest
+
     def heapify_down_recursive(self, index):
         """
         Establish heap conditions for a Max-Heap recursive downwards.
@@ -169,8 +156,23 @@ class CityMaxHeap(AbstractCityHeap):
         # TODO: implement me!
         ...
 
-        # get parent, watch left child and watch right child
-        # if one bigger swap
+        largest = index
+        left_child_index = self.get_left_child_index(index)
+        right_child_index = self.get_right_child_index(index)
+
+        # Check if left child exists and is greater than the current largest
+        if left_child_index is not None and self.get_left_child_population(index) > self.get_city_population(largest):
+            largest = left_child_index
+
+        # Check if right child exists and is greater than the current largest
+        if right_child_index is not None and self.get_right_child_population(index) > self.get_city_population(largest):
+            largest = right_child_index
+
+        # Swap the current node with the largest child if needed
+        if largest != index:
+            self.swap_nodes(index, largest)
+            # Recursively heapify the affected sub-tree
+            self.heapify_down_recursive(largest)
 
     def remove(self):
         """

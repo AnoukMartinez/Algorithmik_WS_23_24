@@ -12,7 +12,6 @@ from bokeh.plotting import figure, from_networkx, show
 from bokeh.models import (BoxSelectTool, Circle, HoverTool, MultiLine, NodesAndLinkedEdges, TapTool, WheelZoomTool)
 from bokeh.palettes import Spectral4
 
-
 class CityMaxHeapVisualizer:
     """
     Class with the responsibility to visualize an array of City objects.

@@ -49,8 +49,8 @@ class HeapCreationAssembler:
 
         # Visualisation
         data_to_visualize: List[City] = self.cityDataManager.get_max_heap_as_list()
-        amount_of_nodes_to_create = 1023
-        # amount_of_nodes_to_create = len(city_data) #all cities, use this for science at the price of performance ;)
+        # amount_of_nodes_to_create = 1023
+        amount_of_nodes_to_create = len(city_data) #all cities, use this for science at the price of performance ;)
         self.visualize_heap(data_to_visualize, amount_of_nodes_to_create, city_data)
 
     def measure_tim_sort_execution_time(self, city_data):

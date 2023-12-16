@@ -121,6 +121,7 @@ class AbstractCityHeap(ABC):
             # print(" -----------> Heap is full, can not insert")
             # print(" -----------> Heap expand now with append")
             self.heapStorage.append(0)
+            self.maximumHeapCapacity = self.maximumHeapCapacity + 1
 
         if self.recursive:
             try:

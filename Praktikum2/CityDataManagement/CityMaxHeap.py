@@ -100,20 +100,19 @@ class CityMaxHeap(AbstractCityHeap):
         Establish heap conditions for a Max-Heap via Floyds Heap Construction Algorithmus.
 
         """
-        # TODO: implement me! REWORK MUST BE DONE !!!!!!
+        # TODO: implement me! Check if finish
         ...
         last_leaf_index = index
 
         # Find the last leaf node with children
-        while last_leaf_index >= 0 and not (self.has_left_child(last_leaf_index) or self.has_right_child(last_leaf_index)):
+        while last_leaf_index >= 0 and not (
+                self.has_left_child(last_leaf_index) or self.has_right_child(last_leaf_index)):
             last_leaf_index -= 1
 
         # Start building the heap from the last non-leaf node
         for index in range(last_leaf_index, -1, -1):
-            #self.heapify_down_recursive(index)
-
-            self.heapify_down_iterative()
-
+            self.heapify_down_recursive(index)
+            # self.heapify_down_iterative()
 
     def heapify_down_iterative(self):
         """
@@ -128,15 +127,22 @@ class CityMaxHeap(AbstractCityHeap):
         for index in range((heap_size // 2) - 1, -1, -1):
             while True:
                 largest = index
-                left_child_index = 2 * index + 1
-                right_child_index = 2 * index + 2
+                left_child_index = None
+                right_child_index = None
+
+                if self.has_left_child(index):
+                    left_child_index = self.get_left_child_index(index)
+                if self.has_right_child(index):
+                    right_child_index = self.get_right_child_index(index)
 
                 # Check if left child exists and is greater than the current largest
-                if left_child_index < heap_size and self.heapStorage[left_child_index] > self.heapStorage[largest]:
+                if left_child_index is not None and left_child_index < heap_size and self.heapStorage[
+                    left_child_index] > self.heapStorage[largest]:
                     largest = left_child_index
 
                 # Check if right child exists and is greater than the current largest
-                if right_child_index < heap_size and self.heapStorage[right_child_index] > self.heapStorage[largest]:
+                if right_child_index is not None and right_child_index < heap_size and self.heapStorage[
+                    right_child_index] > self.heapStorage[largest]:
                     largest = right_child_index
 
                 # If the largest element is the current element, no swap is needed
@@ -178,43 +184,7 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Remove a City from the Max-Heap
         """
-        # TODO: implement me! CHECK if FINISH
+        # TODO: implement me!
         ...
 
-        removed_city = self.heapStorage[0]
 
-        for cit in self.heapStorage:
-            indes = self.heapStorage.index(cit)
-            if self.heapStorage[indes] != 0:
-                # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-                # print(" ~~~~~~ ", indes)
-                # print(" ~~~~~~ Meine Stadt heißt: ", self.heapStorage[indes].name)
-                self.currentHeapLastIndex = indes
-                # print("cur heap las in: ", self.currentHeapLastIndex)
-
-        # print("curent root bevore: ", self.heapStorage[0])
-
-        # print("curent last bevore: ", self.heapStorage[self.currentHeapLastIndex])
-
-        self.swap_nodes(0, self.currentHeapLastIndex)
-        self.heapStorage.pop(self.currentHeapLastIndex)
-
-        for cit in self.heapStorage:
-            # print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-            indes = self.heapStorage.index(cit)
-            if self.heapStorage[indes] != 0:
-                # print(" ~~~~~~ ", indes)
-                # print(" ~~~~~~ Meine Stadt 2 heißt: ", self.heapStorage[indes].name)
-                self.currentHeapLastIndex = indes
-                # print("cur heap 2 las in: ", self.currentHeapLastIndex)
-
-        # print("curent root after: ", self.heapStorage[0])
-        # print("curent last after: ", self.heapStorage[self.currentHeapLastIndex])
-
-        if self.currentHeapLastIndex > 0:
-            print("now sort heap after remove")
-            self.heapify_down_recursive(0)
-
-        return removed_city

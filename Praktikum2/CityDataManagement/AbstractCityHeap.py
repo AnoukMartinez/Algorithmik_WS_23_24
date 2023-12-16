@@ -118,8 +118,11 @@ class AbstractCityHeap(ABC):
         ...
         if self.check_if_heap_is_full() is False:
             if self.recursive:
-                self.heapStorage[self.currentHeapLastIndex] = city
-                self.heapify_up_recursive(self.currentHeapLastIndex)
+                try:
+                    self.heapStorage[self.currentHeapLastIndex] = city
+                    self.heapify_up_recursive(self.currentHeapLastIndex)
+                except IndexError:
+                    print("Heap is full, can not insert recursive")
 
             else:
                 self.heapStorage[self.currentHeapLastIndex] = city
@@ -312,10 +315,13 @@ class AbstractCityHeap(ABC):
         ...
 
         first = self.heapStorage[fst_node_index]
-        second = self.heapStorage[sec_node_index]
+        second = None
+        if len(self.heapStorage) > sec_node_index:
+            second = self.heapStorage[sec_node_index]
 
-        self.heapStorage[sec_node_index] = first
-        self.heapStorage[fst_node_index] = second
+        if second is not None:
+            self.heapStorage[sec_node_index] = first
+            self.heapStorage[fst_node_index] = second
 
     def get_heap_data(self) -> List[City]:
         """

@@ -323,10 +323,10 @@ class AbstractCityHeap(ABC):
         ...
 
         first = None
-        if len(self.heapStorage) > fst_node_index:
+        if fst_node_index is not None and len(self.heapStorage) - 1 >= fst_node_index:
             first = self.heapStorage[fst_node_index]
         second = None
-        if len(self.heapStorage) > sec_node_index:
+        if sec_node_index is not None and len(self.heapStorage) - 1 >= sec_node_index:
             second = self.heapStorage[sec_node_index]
 
         if second is not None and first is not None:

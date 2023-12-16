@@ -48,7 +48,7 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Establish heap conditions for a Max-Heap recursive upwards.
         """
-        # TODO: implement me! CHECK IF finish
+        # Exercise
         ...
         if self.has_parent(index) and index >= 0:
             parent_index = self.get_parent_index(index)
@@ -63,6 +63,10 @@ class CityMaxHeap(AbstractCityHeap):
         """
         # TODO: implement me! Check if finish
         ...
+
+        self.heapify_down_iterative()
+
+        '''
         last_leaf_index = index
 
         # Find the last leaf node with children
@@ -70,11 +74,10 @@ class CityMaxHeap(AbstractCityHeap):
                 self.has_left_child(last_leaf_index) or self.has_right_child(last_leaf_index)):
             last_leaf_index -= 1
 
-        self.heapify_down_iterative()
         # Start building the heap from the last non-leaf node
         # for index in range(last_leaf_index, -1, -1):
             # self.heapify_down_recursive(index)
-
+        '''
 
     def heapify_down_iterative(self):
         """
@@ -150,9 +153,9 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Remove a City from the Max-Heap
         """
-        # TODO: implement me! CHECK if finish
+        # Exercise
         ...
-
+        # 0. expect that heap is sorted
         my_dex = self.currentHeapLastIndex - 1
         # 1. swap first with last
         self.swap_nodes(0, my_dex)
@@ -161,6 +164,9 @@ class CityMaxHeap(AbstractCityHeap):
         removed_city = self.heapStorage.pop()
         self.currentHeapLastIndex = self.currentHeapLastIndex - 1
         # restore maxHeap
-        self.heapify_down_recursive(0)
+        if self.recursive or self.floyd:
+            self.heapify_down_recursive(0)
+        else:
+            self.heapify_down_iterative()
         # return removed_city
         return removed_city

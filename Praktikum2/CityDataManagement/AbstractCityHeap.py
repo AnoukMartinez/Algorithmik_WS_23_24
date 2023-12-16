@@ -117,9 +117,9 @@ class AbstractCityHeap(ABC):
         # TODO: implement me! CHECK if FINISH
         ...
         if self.check_if_heap_is_full() is True:
-            print(" -----------> ", city)
-            print(" -----------> Heap is full, can not insert")
-            print(" -----------> Heap expand now with append")
+            # print(" -----------> ", city)
+            # print(" -----------> Heap is full, can not insert")
+            # print(" -----------> Heap expand now with append")
             self.heapStorage.append(0)
 
         if self.recursive:

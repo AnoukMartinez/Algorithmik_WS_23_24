@@ -121,12 +121,12 @@ class AbstractCityHeap(ABC):
             print("heap full")
             return
 
-        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
-
         if self.recursive:
-            self.heapify_up_recursive(self.currentHeapLastIndex - 1)
+            self.heapify_up_recursive(self.currentHeapLastIndex)
         else:
             self.heapify_up_iterative()
+
+        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 
     def build_heap_via_floyd(self):
         """
@@ -135,7 +135,7 @@ class AbstractCityHeap(ABC):
         for i in self.rawCityData:
             self.heapStorage.append(i)
 
-        self.heapify_up_iterative()
+        self.heapify_floyd(0, self.currentHeapLastIndex)
 
 
     def get_root_city(self):
@@ -158,19 +158,17 @@ class AbstractCityHeap(ABC):
         """
         Return the index of the left child. 
         """
-        left_child_index = 2 * index + 1
-        if left_child_index < self.maximumHeapCapacity:
-            return left_child_index
-        else: return None
+        if self.has_left_child(index):
+            return 2 * index + 1 # return left child index
+        return None # Wenn kein Kind vorhanden ist
 
     def get_right_child_index(self, index):
         """
         Return the index of the right child. 
         """
-        right_child_index = 2 * index + 2
-        if right_child_index < self.maximumHeapCapacity:
-            return right_child_index
-        else: return None
+        if self.has_left_child(index):
+            return 2 * index + 2 # return right child index
+        return None # Wenn kein Kind vorhanden ist
 
     def has_parent(self, index) -> bool:
         """
@@ -186,9 +184,14 @@ class AbstractCityHeap(ABC):
             True    = Has leftChild
             False   = No leftChild
         """
-        if self.get_left_child_index(index) == None:
+        left_child_index = 2 * index + 1
+        if left_child_index > self.maximumHeapCapacity:
+            # Kind wäre auf der nächsten Ebene, die es nicht geben kann
             return False
-        else: return True
+        elif self.heapStorage[left_child_index] == 0:
+            return False
+        
+        return True
 
     def has_right_child(self, index):
         """
@@ -196,9 +199,14 @@ class AbstractCityHeap(ABC):
             True    = Has rightChild
             False   = No rightChild
         """
-        if self.get_right_child_index(index) == None:
+        right_child_index = 2 * index + 1
+        if right_child_index > self.maximumHeapCapacity:
+            # Kind wäre auf der nächsten Ebene, die es nicht geben kann
             return False
-        else: return True
+        elif self.heapStorage[right_child_index] == 0:
+            return False
+        
+        return True
 
     def get_city_population(self, index):
         """

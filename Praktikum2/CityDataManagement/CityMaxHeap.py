@@ -28,7 +28,7 @@ class CityMaxHeap(AbstractCityHeap):
         # Wir rufen diese Methode JEDES mal auf wenn eine neue Node eingefügt wird
         # Wir fangen also immer da an, wo als letztes ne Node eingefügt wurde
         # Und zwar in insert in AbstractCityHeap.py
-        current_index = self.currentHeapLastIndex - 1
+        current_index = self.currentHeapLastIndex
         parent_index = self.get_parent_index(current_index)
 
         while current_index > 0:
@@ -71,8 +71,7 @@ class CityMaxHeap(AbstractCityHeap):
         '''
         # i könnte auch = amount_of_cities sein.
         i = self.currentHeapLastIndex # Wir wollen mit der letzten Node anfangen
-        while i < 0: # Solange bis root Node erreicht ist. root muss ja nicht geswapt werden
-            # Percolatedown = check node values, then swap if necessary
+        while i > 0: # Solange bis root Node erreicht ist. root muss ja nicht geswapt werden
             current_node = self.heapStorage[i]
             parentnode = self.heapStorage[self.get_parent_index(current_node)]
 
@@ -118,16 +117,24 @@ class CityMaxHeap(AbstractCityHeap):
         Establish heap conditions for a Max-Heap recursive downwards.
         """
         if index == 0: # Alternativ if self.has_parent(index) oder so
-            root_node = self.heapStorage[index]
-            last_node = self.heapStorage[self.currentHeapLastIndex]
+            root_index = index # Diese deklarationen sind absolut überflüssig
+            # aber ich bin gerade zu müde um mir was besseres auszudenken
+            root_node = self.heapStorage[root_index]
+            last_node_index = self.currentHeapLastIndex
+            last_node = self.heapStorage[last_node_index]
 
-            self.swap_nodes(root_node, last_node) # Tausche erste und letzte Node
+            self.swap_nodes(root_index, last_node_index) # Tausche erste und letzte Node
             self.heapStorage[self.currentHeapLastIndex] = 0 # Lösche letzten Eintrag
         
+        left_child_index = None
+        right_child_index = None
+
         if self.has_left_child(index):
             left_child_index = self.get_left_child_index(index)
+        else: return # BITTE NOCH AUSBESSERN ICH WEISS NICHT 100% OB DAS RICHTIG IST
         if self.has_right_child(index):
             right_child_index = self.get_right_child_index(index)
+        else: return 
 
         smaller_child_index = None # Instanziiere smallerchild (KA ob man das braucht aber paranoia)
         if left_child_index.population < right_child_index.population:
@@ -148,6 +155,6 @@ class CityMaxHeap(AbstractCityHeap):
         """
         # Die "City" in Frage die hier removed wird ist übrigens immer die root node.
         if self.recursive:
-            self.heapify_down_recursive(self.heapStorage[0])
+            self.heapify_down_recursive(0)
         else:
             self.heapify_down_iterative()

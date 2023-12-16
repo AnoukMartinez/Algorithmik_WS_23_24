@@ -31,12 +31,11 @@ class HeapCreationAssembler:
         self.cityDataManager.create_new_max_city_heap(city_data, True, False)
         self.executionTimeAnalyser.stop("MaxHeap Execution time Recursive: ")
 
-        '''
         # create Max Heap and measure Execution Time for Floyds Algorithm
         self.executionTimeAnalyser.start()
         self.cityDataManager.create_new_max_city_heap(city_data, True, True)
         self.executionTimeAnalyser.stop("MaxHeap Execution time with Floyd's Algorithm: ")
-        '''
+        
 
         # Further Execution Time measurement
         self.measure_tim_sort_execution_time(city_data)
@@ -47,7 +46,7 @@ class HeapCreationAssembler:
         print("This should be removed!")
 
         # Node removal
-        # self.cityDataManager.remove_city_with_highest_population()
+        self.cityDataManager.remove_city_with_highest_population()
         # Wirft Fehler, bitte nicht vergessen später zu fixen
 
         # Visualisation

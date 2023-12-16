@@ -163,8 +163,12 @@ class CityMaxHeap(AbstractCityHeap):
         ...
 
         largest = index
-        left_child_index = self.get_left_child_index(index)
-        right_child_index = self.get_right_child_index(index)
+        left_child_index = None
+        if self.has_left_child(index):
+            left_child_index = self.get_left_child_index(index)
+        right_child_index = None
+        if self.has_right_child(index):
+            right_child_index = self.get_right_child_index(index)
 
         # Check if left child exists and is greater than the current largest
         if left_child_index is not None and self.get_left_child_population(index) > self.get_city_population(largest):
@@ -186,5 +190,29 @@ class CityMaxHeap(AbstractCityHeap):
         """
         # TODO: implement me!
         ...
+
+        print(" ~~~~~~ remove ~~~~~ cur last index ", self.currentHeapLastIndex)
+        # my_dex = len(self.heapStorage) - 1
+        my_dex = self.currentHeapLastIndex - 1
+        print(" ~~~~~~ remove ~~~~~ cur last dex index ", my_dex)
+
+        print(" ~~~~~~ remove ~~~~~ cur last city ", self.heapStorage[my_dex])
+        print(" ~~~~~~ remove ~~~~~ before swap1 swap2 ", self.heapStorage[0].name, " ",
+              self.heapStorage[my_dex].name)
+
+        # 1. swap first with last
+        self.swap_nodes(0, my_dex)
+        print(" ~~~~~~ remove ~~~~~ after swap1 swap2 ", self.heapStorage[0].name, " ",
+              self.heapStorage[my_dex].name)
+        # 2. remove at last index
+        #   pop remove on last index and return removed city
+        removed_city = self.heapStorage.pop()
+        self.currentHeapLastIndex = self.currentHeapLastIndex - 1
+        # restore maxHeap
+        print(" ~~~~~~ remove ~~~~~ old root before sorting ", self.heapStorage[0].name)
+        self.heapify_down_recursive(0)
+        print(" ~~~~~~ remove ~~~~~ new root after sorting ", self.heapStorage[0].name)
+        # return removed_city
+        return removed_city
 
 

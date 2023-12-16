@@ -116,19 +116,26 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me! CHECK if FINISH
         ...
-        if self.check_if_heap_is_full() is False:
-            if self.recursive:
-                try:
-                    self.heapStorage[self.currentHeapLastIndex] = city
-                    self.heapify_up_recursive(self.currentHeapLastIndex)
-                except IndexError:
-                    print("Heap is full, can not insert recursive")
+        if self.check_if_heap_is_full() is True:
+            print(" -----------> ", city)
+            print(" -----------> Heap is full, can not insert")
+            print(" -----------> Heap expand now with append")
+            self.heapStorage.append(0)
 
-            else:
+        if self.recursive:
+            try:
+                self.heapStorage[self.currentHeapLastIndex] = city
+                self.heapify_up_recursive(self.currentHeapLastIndex)
+            except IndexError:
+                print("Heap is full, can not insert recursive")
+
+        else:
+            try:
                 self.heapStorage[self.currentHeapLastIndex] = city
                 self.heapify_up_iterative()
-
-            self.currentHeapLastIndex = self.currentHeapLastIndex + 1
+            except IndexError:
+                print("Heap is full, can not insert iterative")
+        self.currentHeapLastIndex = self.currentHeapLastIndex + 1
 
     def build_heap_via_floyd(self):
         """
@@ -305,7 +312,8 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me! CHECK if FINISH
         ...
-        return self.currentHeapLastIndex > self.maximumHeapCapacity
+
+        return not (self.currentHeapLastIndex < len(self.heapStorage))
 
     def swap_nodes(self, fst_node_index, sec_node_index):
         """
@@ -314,12 +322,14 @@ class AbstractCityHeap(ABC):
         # TODO: implement me! CHECK if FINISH
         ...
 
-        first = self.heapStorage[fst_node_index]
+        first = None
+        if len(self.heapStorage) > fst_node_index:
+            first = self.heapStorage[fst_node_index]
         second = None
         if len(self.heapStorage) > sec_node_index:
             second = self.heapStorage[sec_node_index]
 
-        if second is not None:
+        if second is not None and first is not None:
             self.heapStorage[sec_node_index] = first
             self.heapStorage[fst_node_index] = second
 

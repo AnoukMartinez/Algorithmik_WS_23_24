@@ -32,17 +32,14 @@ class CityMaxHeap(AbstractCityHeap):
         # TODO: implement me! CHECK if finish
         ...
 
-        # get last inserted
-        requested_node = self.heapStorage[self.currentHeapLastIndex]
+        node_index = self.currentHeapLastIndex
+        requested_node = self.heapStorage[node_index]
 
-        # check if node had parent
-        while (self.has_parent(self.heapStorage.index(requested_node)) and requested_node.population >
-               self.heapStorage[self.get_parent_index(self.heapStorage.index(requested_node))].population):
-            parent_index = self.get_parent_index(self.heapStorage.index(requested_node))
-
-            my_index = self.heapStorage.index(requested_node)
-
-            self.swap_nodes(parent_index, my_index)
+        while (self.has_parent(node_index) and requested_node.population >
+               self.heapStorage[self.get_parent_index(node_index)].population):
+            parent_index = self.get_parent_index(node_index)
+            self.swap_nodes(parent_index, node_index)
+            node_index = parent_index
 
     def heapify_up_recursive(self, index):
         """

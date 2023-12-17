@@ -174,13 +174,17 @@ class AbstractCityHeap(ABC):
         Return the index of the left child.
         """
         # TODO: implement me! CHECK if FINISH
-
-        left = ((2 * index) + 1)
-        try:
-            self.heapStorage[left]
-        except IndexError:
+        if self.has_left_child(index):
+            return (2 * index) + 1
+        else:
             return None
-        return left
+
+        #left = ((2 * index) + 1)
+        #try:
+        #    self.heapStorage[left]
+        #except IndexError:
+        #    return None
+        #return left
 
     def get_right_child_index(self, index):
         """
@@ -188,12 +192,15 @@ class AbstractCityHeap(ABC):
         """
         # TODO: implement me! CHECK if FINISH
 
-        right = ((2 * index) + 2)
-        try:
-            self.heapStorage[right]
-        except IndexError:
+        if self.has_right_child(index):
+            return (2 * index) + 2
+        else:
             return None
-        return right
+        # try:
+        #    self.heapStorage[right]
+        # except IndexError:
+        #    return None
+        # return right
 
     def has_parent(self, index) -> bool:
         """

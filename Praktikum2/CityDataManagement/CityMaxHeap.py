@@ -80,42 +80,35 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Establish heap conditions for a Max-Heap iterative downwards.
         """
-        # TODO: implement me! CHECK if finish
-        ...
+        # Exercise
 
-        heap_size = len(self.heapStorage)
+        heap_size = self.maximumHeapCapacity
 
         # Start from the last non-leaf node and go up to the root
-        for index in range((heap_size // 2) - 1, -1, -1):
+        for index in range(heap_size, -1, -1):
             while True:
                 largest = index
-                left_child_index = None
-                right_child_index = None
 
                 if self.has_left_child(index):
-                    left_child_index = self.get_left_child_index(index)
-                if self.has_right_child(index):
-                    right_child_index = self.get_right_child_index(index)
-
-                # Check if left child exists and is greater than the current largest
-                if left_child_index is not None and self.heapStorage[
-                    left_child_index] > self.heapStorage[largest]:
-                    largest = left_child_index
-
-                # Check if right child exists and is greater than the current largest
-                if right_child_index is not None and self.heapStorage[
-                    right_child_index] > self.heapStorage[largest]:
-                    largest = right_child_index
+                    # Check if right child exists and is greater than the current largest
+                    if (self.has_right_child(index) and
+                            (self.get_right_child_index(index) > self.get_city_population(index))
+                            > self.get_left_child_population(index)):
+                        largest = self.get_right_child_index(index)
+                    # Check if left child exists and is greater than the current largest
+                    elif self.get_left_child_population(index) > self.get_city_population(index):
+                        largest = self.get_left_child_index(index)
+                    else:
+                        largest = index
 
                 # If the largest element is the current element, no swap is needed
-                if largest == index:
+                if largest != index:
+                    # Swap the current node with the largest child
+                    self.swap_nodes(index, largest)
+                    # Update the index for the next iteration
+                    index = largest
+                else:
                     break
-
-                # Swap the current node with the largest child
-                self.swap_nodes(index, largest)
-
-                # Update the index for the next iteration
-                index = largest
 
     def heapify_down_recursive(self, index):
         """
@@ -125,20 +118,18 @@ class CityMaxHeap(AbstractCityHeap):
         ...
 
         largest = index
-        left_child_index = None
+
         if self.has_left_child(index):
-            left_child_index = self.get_left_child_index(index)
-        right_child_index = None
-        if self.has_right_child(index):
-            right_child_index = self.get_right_child_index(index)
+            # Check if left child exists and is greater than the current largest
+            if self.get_left_child_population(index) > self.get_city_population(largest):
+                largest = self.get_left_child_index(index)
 
-        # Check if left child exists and is greater than the current largest
-        if left_child_index is not None and self.get_left_child_population(index) > self.get_city_population(largest):
-            largest = left_child_index
-
-        # Check if right child exists and is greater than the current largest
-        if right_child_index is not None and self.get_right_child_population(index) > self.get_city_population(largest):
-            largest = right_child_index
+            # Check if right child exists and is greater than the current largest
+            if (self.has_right_child(index) and
+                    self.get_left_child_index(index)
+                    < self.get_left_child_population(index)
+                    > self.get_city_population(index)):
+                largest = self.get_right_child_index(index)
 
         # Swap the current node with the largest child if needed
         if largest != index:

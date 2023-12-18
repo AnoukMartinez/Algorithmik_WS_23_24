@@ -110,15 +110,9 @@ class AbstractCityHeap(ABC):
             for i in self.rawCityData:
                 self.insert(i)
                 
-
     def insert(self, city):
-        """
-        Insert a single City into the Heap.
-        """
-        try:
-            self.heapStorage[self.currentHeapLastIndex] = city
-        except: 
-            print("heap full")
+        if self.check_if_heap_is_full():
+            print("Heap is Full, Could Not Insert")
             return
 
         if self.recursive:
@@ -159,16 +153,18 @@ class AbstractCityHeap(ABC):
         Return the index of the left child. 
         """
         if self.has_left_child(index):
-            return 2 * index + 1 # return left child index
-        return None # Wenn kein Kind vorhanden ist
+            return 2 * index + 1 
+        return None
 
     def get_right_child_index(self, index):
         """
         Return the index of the right child. 
         """
-        if self.has_left_child(index):
-            return 2 * index + 2 # return right child index
-        return None # Wenn kein Kind vorhanden ist
+        if self.has_right_child(index):
+            return 2 * index + 2 
+        return None
+    
+
 
     def has_parent(self, index) -> bool:
         """
@@ -186,7 +182,6 @@ class AbstractCityHeap(ABC):
         """
         left_child_index = 2 * index + 1
         if left_child_index > self.maximumHeapCapacity:
-            # Kind wäre auf der nächsten Ebene, die es nicht geben kann
             return False
         elif self.heapStorage[left_child_index] == 0:
             return False
@@ -201,7 +196,6 @@ class AbstractCityHeap(ABC):
         """
         right_child_index = 2 * index + 1
         if right_child_index > self.maximumHeapCapacity:
-            # Kind wäre auf der nächsten Ebene, die es nicht geben kann
             return False
         elif self.heapStorage[right_child_index] == 0:
             return False
@@ -212,7 +206,7 @@ class AbstractCityHeap(ABC):
         """
         Return the Population of a City with the given index in the heap.
         """
-        if(self.heapStorage[index] == 0):
+        if(self.heapStorage[index] == 0 or index == None):
             return None
         return self.heapStorage[index].population
 
@@ -243,9 +237,7 @@ class AbstractCityHeap(ABC):
             True    = Full
             False   = Not full
         """
-        if len(self.heapStorage) >= self.maximumHeapCapacity:
-            return True
-        else: return False
+        return self.currentHeapLastIndex >= self.maximumHeapCapacity
 
     def swap_nodes(self, fst_node_index, sec_node_index):
         """
@@ -253,6 +245,18 @@ class AbstractCityHeap(ABC):
         """
         self.heapStorage[fst_node_index], self.heapStorage[sec_node_index] =\
         self.heapStorage[sec_node_index], self.heapStorage[fst_node_index]
+
+    def swap_nodes(self, fst_node_index, sec_node_index):
+        """
+        Swap two nodes specified by their index.
+        """
+        first = self.heapStorage[fst_node_index]
+        second = self.heapStorage[sec_node_index]
+
+        if first != 0 and second != 0:
+            self.heapStorage[sec_node_index] = first
+            self.heapStorage[fst_node_index] = second
+        else: print("Wasn't provided with 2 Nodes")
 
     def get_heap_data(self) -> List[City]:
         """

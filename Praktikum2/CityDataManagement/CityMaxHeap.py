@@ -25,9 +25,6 @@ class CityMaxHeap(AbstractCityHeap):
         """
         Establish heap conditions for a Max-Heap iterative upwards.
         """
-        # Wir rufen diese Methode JEDES mal auf wenn eine neue Node eingefügt wird
-        # Wir fangen also immer da an, wo als letztes ne Node eingefügt wurde
-        # Und zwar in insert in AbstractCityHeap.py
         current_index = self.currentHeapLastIndex
         parent_index = self.get_parent_index(current_index)
 
@@ -37,11 +34,10 @@ class CityMaxHeap(AbstractCityHeap):
 
             if node_population > parent_population:
                 self.swap_nodes(current_index, parent_index)
-                # Setze node values neu
                 current_index = parent_index
                 parent_index = self.get_parent_index(current_index)
             else:
-                return # Sonst: Nicht mehr größer als, kann terminieren
+                return 
 
     def heapify_up_recursive(self, index):
         """

@@ -106,8 +106,21 @@ def depthFirstSearch(problem: SearchProblem):
 
     return [] # Keine Lösung gefunden: Return Leere Aktionsliste
 
-def depthFirstSearchRecursive(problem : SearchProblem):
-    util.raiseNotDefined()
+def depthFirstSearchRecursive(problem : SearchProblem, currentNode, visited, actions):
+    
+    if problem.isGoalState(currentNode):
+        if problem.isGoalState(problem.getStartState()):
+            return actions
+        actions.insert(0, currentNode[1]) # current Richtung an erster Stelle einfügen (gehen rekursiv zurück)
+        return
+
+    visited.append(currentNode)
+
+    for successor, action, distance in problem.getSuccessors(currentNode):
+        if successor not in visited:
+            depthFirstSearchRecursive(problem, successor, visited, actions)
+
+    return actions
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
@@ -135,5 +148,6 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
 # Abbreviations
 bfs = breadthFirstSearch
 dfs = depthFirstSearch
+dfsr = depthFirstSearchRecursive
 astar = aStarSearch
 ucs = uniformCostSearch

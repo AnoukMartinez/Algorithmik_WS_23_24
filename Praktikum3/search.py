@@ -86,7 +86,27 @@ def depthFirstSearch(problem: SearchProblem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
-    "*** YOUR CODE HERE ***"
+    perimeter = util.Queue()
+    visited = set()
+
+    perimeter.push((problem.getStartState(), [])) # [] = Aktionsliste, um zur Node zu kommen
+
+    while not len(perimeter.list) <= 0: # perimeter.isEmpty ist bei mir irgendwie immer true
+        currentFrom, actionList = perimeter.pop()
+
+        if problem.isGoalState(currentFrom):
+            return actionList
+
+        if currentFrom not in visited:
+            for successor, action, distance in problem.getSuccessors(currentFrom):
+                if successor not in visited:
+                    nextActions = actionList + [action]
+                    perimeter.push((successor, nextActions))
+            visited.add(currentFrom)
+
+    return [] # Keine Lösung gefunden: Return Leere Aktionsliste
+
+def depthFirstSearchRecursive(problem : SearchProblem):
     util.raiseNotDefined()
 
 def breadthFirstSearch(problem: SearchProblem):

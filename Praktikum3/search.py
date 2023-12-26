@@ -86,12 +86,12 @@ def depthFirstSearch(problem: SearchProblem):
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
-    perimeter = util.Queue()
+    perimeter = util.Stack()
     visited = set()
 
     perimeter.push((problem.getStartState(), [])) # [] = Aktionsliste, um zur Node zu kommen
 
-    while not len(perimeter.list) <= 0: # perimeter.isEmpty ist bei mir irgendwie immer true
+    while len(perimeter.list) > 0: # perimeter.isEmpty ist bei mir irgendwie immer true
         currentFrom, actionList = perimeter.pop()
 
         if problem.isGoalState(currentFrom):
@@ -107,7 +107,6 @@ def depthFirstSearch(problem: SearchProblem):
     return [] # Keine Lösung gefunden: Return Leere Aktionsliste
 
 def depthFirstSearchRecursive(problem : SearchProblem, currentNode, visited, actions):
-    
     if problem.isGoalState(currentNode):
         if problem.isGoalState(problem.getStartState()):
             return actions
@@ -124,7 +123,29 @@ def depthFirstSearchRecursive(problem : SearchProblem, currentNode, visited, act
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
-    "*** YOUR CODE HERE ***"
+    perimeter = util.Queue()
+    visited = set()
+
+    perimeter.push((problem.getStartState(), []))
+    visited.add(problem.getStartState())
+
+    while len(perimeter.list) > 0:
+        currentFrom, actionList = perimeter.pop()
+
+        if problem.isGoalState(currentFrom):
+            return actionList # Kann leer sein, wenn Start = Ziel
+
+        for successor, action, distance in problem.getSuccessors(currentFrom):
+            currentTo = successor
+            if currentTo not in visited:
+                nextAction = actionList + [action]
+                perimeter.push((currentTo, nextAction))
+                visited.add(currentTo)
+
+    return [] # Wenn kein Pfad gefunden wird
+
+def breadthFirstSearchRecursive():
+    """ WORK IN PROGRESS """
     util.raiseNotDefined()
 
 def uniformCostSearch(problem: SearchProblem):
@@ -147,6 +168,7 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
 
 # Abbreviations
 bfs = breadthFirstSearch
+bfsr = breadthFirstSearchRecursive
 dfs = depthFirstSearch
 dfsr = depthFirstSearchRecursive
 astar = aStarSearch

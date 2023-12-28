@@ -116,7 +116,7 @@ class SearchAgent(Agent):
         starttime = time.time()
         problem = self.searchType(state) # Makes a new search problem
         if self.fn == 'dfsr': # Funktioniert noch nicht!
-            self.actions = self.searchFunction(problem, problem.getStartState(), [], [])
+            self.actions = self.searchFunction(problem, problem.getStartState(), set(), [])
         elif self.fn == 'bfsr':
             """ WORK IN PROGRESS """
             self.actions = self.searchFunction()

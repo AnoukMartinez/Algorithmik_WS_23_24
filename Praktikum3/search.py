@@ -113,7 +113,7 @@ def depthFirstSearchRecursive(problem : SearchProblem, currentNode, visited, act
         actions.insert(0, currentNode[1]) # current Richtung an erster Stelle einfügen (gehen rekursiv zurück)
         return
 
-    visited.append(currentNode)
+    visited.add(currentNode)
 
     for successor, action, distance in problem.getSuccessors(currentNode):
         if successor not in visited:

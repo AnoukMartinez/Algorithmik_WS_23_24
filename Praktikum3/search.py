@@ -106,20 +106,19 @@ def depthFirstSearch(problem: SearchProblem):
 
     return [] # Keine Lösung gefunden: Return Leere Aktionsliste
 
-def depthFirstSearchRecursive(problem : SearchProblem, currentNode, visited, actions):
-    if problem.isGoalState(currentNode):
-        if problem.isGoalState(problem.getStartState()):
-            return actions
-        actions.insert(0, currentNode[1]) # current Richtung an erster Stelle einfügen (gehen rekursiv zurück)
-        return
+def depthFirstSearchRecursive(problem : SearchProblem):
+    def loop(problem : SearchProblem, currentNode, visited, actions):
+        if problem.isGoalState(currentNode[0]):
+            return [currentNode[1]]
 
-    visited.add(currentNode)
-
-    for successor, action, distance in problem.getSuccessors(currentNode):
-        if successor not in visited:
-            depthFirstSearchRecursive(problem, successor, visited, actions)
-
-    return actions
+        for successor, action, distance in reversed(problem.getSuccessors(currentNode[0])):
+            if successor not in visited:
+                visited.add(successor)
+                result = loop(problem, (successor, action, distance), visited, actions)
+                if result:
+                   return [action] + result
+        return []
+    return loop(problem, (problem.getStartState(), 0, 0), {problem.getStartState()}, [])
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
@@ -136,16 +135,16 @@ def breadthFirstSearch(problem: SearchProblem):
             return actionList # Kann leer sein, wenn Start = Ziel
 
         for successor, action, distance in problem.getSuccessors(currentFrom):
-            currentTo = successor
-            if currentTo not in visited:
+            if successor not in visited:
                 nextAction = actionList + [action]
-                perimeter.push((currentTo, nextAction))
-                visited.add(currentTo)
+                perimeter.push((successor, nextAction))
+                visited.add(successor)
 
     return [] # Wenn kein Pfad gefunden wird
 
 def breadthFirstSearchRecursive():
     """ WORK IN PROGRESS """
+    # Mach ich wahrscheinlich doch nicht heh
     util.raiseNotDefined()
 
 def uniformCostSearch(problem: SearchProblem):

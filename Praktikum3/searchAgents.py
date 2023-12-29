@@ -101,7 +101,6 @@ class SearchAgent(Agent):
             raise AttributeError(prob + ' is not a search problem type in SearchAgents.py.')
         self.searchType = globals()[prob]
         print('[SearchAgent] using problem type ' + prob)
-        self.fn = fn
 
     def registerInitialState(self, state):
         """
@@ -115,13 +114,7 @@ class SearchAgent(Agent):
         if self.searchFunction == None: raise Exception("No search function provided for SearchAgent")
         starttime = time.time()
         problem = self.searchType(state) # Makes a new search problem
-        if self.fn == 'dfsr': # Funktioniert noch nicht!
-            self.actions = self.searchFunction(problem, problem.getStartState(), set(), [])
-        elif self.fn == 'bfsr':
-            """ WORK IN PROGRESS """
-            self.actions = self.searchFunction()
-        else:
-            self.actions  = self.searchFunction(problem) # Find a path
+        self.actions  = self.searchFunction(problem) # Find a path
         if self.actions == None:
             self.actions = []
         totalCost = problem.getCostOfActions(self.actions)

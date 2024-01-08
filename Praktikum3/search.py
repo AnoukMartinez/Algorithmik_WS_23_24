@@ -16,8 +16,10 @@
 In search.py, you will implement generic search algorithms which are called by
 Pacman agents (in searchAgents.py).
 """
+from prompt_toolkit.search import SearchState
 
 import util
+
 
 class SearchProblem:
     """
@@ -70,7 +72,8 @@ def tinyMazeSearch(problem):
     from game import Directions
     s = Directions.SOUTH
     w = Directions.WEST
-    return  [s, s, w, s, w, w, s, w]
+    return [s, s, w, s, w, w, s, w]
+
 
 def depthFirstSearch(problem: SearchProblem):
     """
@@ -87,17 +90,114 @@ def depthFirstSearch(problem: SearchProblem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    #    print("Start:", problem.getStartState())
+    #    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    #    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+
+    def dfs_helper(currentNode, visited):
+        node_stack = util.Stack()
+        node_stack.push(currentNode)
+
+        while not node_stack.isEmpty():
+            current_node = node_stack.pop()
+            current_state = current_node[0]
+            current_direction = current_node[1]
+
+            if problem.isGoalState(current_state):
+                return [current_direction]
+
+            for element in reversed(problem.getSuccessors(current_state)):
+                state, direction, distance = element
+                if state not in visited and element not in [node for node in node_stack.list]:
+                    # print(state, direction, distance)
+                    visited.add(state)
+                    node_stack.push(element)
+                    result = dfs_helper(element, visited)
+                    if result:
+                        # print("ENDE::::: ", [direction] + result)
+                        return [direction] + result
+
+    # [State(x,y), direction, value], start,state
+    return dfs_helper((problem.getStartState(), '', 0), {problem.getStartState()})
+
+
+'''
+    
+    nodes_stack = util.Stack()
+
+    visited_fields = set()
+
+    visited_fields.add(problem.getStartState())
+
+    nodes_stack.push(problem.getSuccessors(problem.getStartState())[0])
+    visited_fields.add(problem.getStartState())
+
+    while len(visited_fields) > 0 or not problem.isGoalState(visited_fields.pop()):
+
+        for element in nodes_stack.list:
+            print("ELEMENT", element)
+            state, direction, distance = element
+            if element not in nodes_stack.list:
+                nodes_stack.push(element)
+            if problem.isGoalState(state):
+                return True
+            print(len(visited_fields))
+            while len(nodes_stack.list) > 0:
+                if state not in visited_fields:
+                    print("state ", state)
+                    visited_fields.add(state)
+                    print("visited_fields ", visited_fields)
+                    node = nodes_stack.pop()
+                    note_nigh = problem.getSuccessors(state)
+                    print("note_nigh ", note_nigh)
+                    print("length 1", len(nodes_stack.list))
+                    visited_fields.add(node[0])
+
+                    return [direction]
+                else:
+                    print("length 2", len(nodes_stack.list))
+'''
+
+'''
+    Start's successors: [((5, 4), 'South', 1), ((4, 5), 'West', 1)]
+    (x,y) Richtung, 1
+    
+
+    if problem.isGoalState(problem.getStartState()):
+        return True
+    else:
+        nodes_stack.push(problem.getStartState())
+        if problem.getStartState() not in visited_fields:
+            visited_fields.add(problem.getStartState())
+        for element in problem.getSuccessors(problem.getStartState()):
+            print("ELEMENT", element)
+            nodes_stack.push(element)
+            state, direction, distance = element
+            if state not in visited_fields:
+                visited_fields.add(state)
+                return depthFirstSearch(state)
+
+        else:
+            return False
+    '''
+
+    # while len(nodes_stack.list) > 0:
+
+    # util.raiseNotDefined()
+
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
 
+
 def uniformCostSearch(problem: SearchProblem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+
 
 def nullHeuristic(state, problem=None):
     """
@@ -105,6 +205,7 @@ def nullHeuristic(state, problem=None):
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
     return 0
+
 
 def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""

@@ -95,7 +95,7 @@ def depthFirstSearch(problem: SearchProblem):
     #    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     #    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
 
-    def dfs_helper(currentNode, visited):
+    def dfs_helper(currentNode, visited_nodes):
         node_stack = util.Stack()
         node_stack.push(currentNode)
 
@@ -109,11 +109,11 @@ def depthFirstSearch(problem: SearchProblem):
 
             for element in reversed(problem.getSuccessors(current_state)):
                 state, direction, distance = element
-                if state not in visited and element not in [node for node in node_stack.list]:
+                if state not in visited_nodes and element not in [node for node in node_stack.list]:
                     # print(state, direction, distance)
-                    visited.add(state)
+                    visited_nodes.add(state)
                     node_stack.push(element)
-                    result = dfs_helper(element, visited)
+                    result = dfs_helper(element, visited_nodes)
                     if result:
                         # print("ENDE::::: ", [direction] + result)
                         return [direction] + result

@@ -22,14 +22,14 @@ class HeapCreationAssembler:
         city_data = self.importer.import_from_file()
 
         # create Max Heap and measure Execution Time Iterative
-        self.executionTimeAnalyser.start()
-        self.cityDataManager.create_new_max_city_heap(city_data, False, False)
-        self.executionTimeAnalyser.stop("MaxHeap Execution time Iterative: ")
+        # self.executionTimeAnalyser.start()
+        #self.cityDataManager.create_new_max_city_heap(city_data, False, False)
+        # self.executionTimeAnalyser.stop("MaxHeap Execution time Iterative: ")
 
         # create Max Heap and measure Execution Time Recursive
-        self.executionTimeAnalyser.start()
-        self.cityDataManager.create_new_max_city_heap(city_data, True, False)
-        self.executionTimeAnalyser.stop("MaxHeap Execution time Recursive: ")
+        # self.executionTimeAnalyser.start()
+        # self.cityDataManager.create_new_max_city_heap(city_data, True, False)
+        # self.executionTimeAnalyser.stop("MaxHeap Execution time Recursive: ")
 
         # create Max Heap and measure Execution Time for Floyds Algorithm
         self.executionTimeAnalyser.start()
@@ -37,8 +37,8 @@ class HeapCreationAssembler:
         self.executionTimeAnalyser.stop("MaxHeap Execution time with Floyd's Algorithm: ")
 
         # Further Execution Time measurement
-        self.measure_tim_sort_execution_time(city_data)
-        self.measure_max_heap_execution_time_via_timeit(10)
+        # self.measure_tim_sort_execution_time(city_data)
+        # self.measure_max_heap_execution_time_via_timeit(10)
 
         # Node add
         self.cityDataManager.insert_new_city_into_max_city_heap("Hobbiton", "the Shire", 80000000000)
@@ -49,8 +49,8 @@ class HeapCreationAssembler:
 
         # Visualisation
         data_to_visualize: List[City] = self.cityDataManager.get_max_heap_as_list()
-        amount_of_nodes_to_create = 1023
-        # amount_of_nodes_to_create = len(city_data) #all cities, use this for science at the price of performance ;)
+        # amount_of_nodes_to_create = 1023
+        amount_of_nodes_to_create = len(city_data) #all cities, use this for science at the price of performance ;)
         self.visualize_heap(data_to_visualize, amount_of_nodes_to_create, city_data)
 
     def measure_tim_sort_execution_time(self, city_data):

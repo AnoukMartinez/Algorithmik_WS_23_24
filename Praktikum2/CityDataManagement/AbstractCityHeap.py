@@ -268,7 +268,7 @@ class AbstractCityHeap(ABC):
         Return the Population of a City with the given index in the heap.
         """
         # TODO: implement me! CHECK if FINISH
-        ...
+
         return self.heapStorage[index].population
 
     def get_parent_population(self, index):

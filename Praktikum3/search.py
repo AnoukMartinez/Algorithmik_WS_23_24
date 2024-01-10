@@ -91,29 +91,29 @@ def depthFirstSearch(problem: SearchProblem):
     """
     "*** YOUR CODE HERE ***"
 
-    def dfs_helper(current, visited_nodes):
-        node_stack = util.Stack()
-        node_stack.push(current)
+    node_stack = util.Stack()
+    node_stack.push((problem.getStartState(), []))
 
-        while not node_stack.isEmpty():
-            current_node = node_stack.pop()
-            current_state, current_directions = current_node
+    visited_nodes = set()
 
-            if problem.isGoalState(current_state):
-                return current_directions
+    while not node_stack.isEmpty():
+        current_node = node_stack.pop()
+        current_state, current_directions = current_node
+
+        if problem.isGoalState(current_state):
+            return current_directions
+
+        if current_state not in visited_nodes:
+            visited_nodes.add(current_state)
 
             for successor in reversed(problem.getSuccessors(current_state)):
                 next_state, next_direction, _ = successor
                 if next_state not in visited_nodes:
-                    visited_nodes.add(next_state)
+                    next_directions = current_directions + [next_direction]
+                    next_node = (next_state, next_directions)
+                    node_stack.push(next_node)
 
-                    # Erstelle eine neue Liste mit den aktuellen Richtungen und füge die neue Richtung hinzu
-                    next_direction = dfs_helper((next_state, current_directions + [next_direction]), visited_nodes)
-                    if next_direction is not None:
-                        return next_direction
-
-    # [State(x,y), direction, value], start,state
-    return dfs_helper((problem.getStartState(), []), {problem.getStartState()})
+    return None
 
 
 

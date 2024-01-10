@@ -91,10 +91,6 @@ def depthFirstSearch(problem: SearchProblem):
     """
     "*** YOUR CODE HERE ***"
 
-    #    print("Start:", problem.getStartState())
-    #    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
-    #    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-
     def dfs_helper(currentNode, visited_nodes):
         node_stack = util.Stack()
         node_stack.push(currentNode)
@@ -102,24 +98,25 @@ def depthFirstSearch(problem: SearchProblem):
         while not node_stack.isEmpty():
             current_node = node_stack.pop()
             current_state = current_node[0]
-            current_direction = current_node[1]
+            current_directions = current_node[1]
 
             if problem.isGoalState(current_state):
-                return [current_direction]
+                return current_directions
 
-            for element in reversed(problem.getSuccessors(current_state)):
-                state, direction, distance = element
-                if state not in visited_nodes and element not in [node for node in node_stack.list]:
-                    # print(state, direction, distance)
+            successor = problem.getSuccessors(current_state)
+            for element in reversed(successor):
+                state, direction, _ = element
+                if state not in visited_nodes:
                     visited_nodes.add(state)
-                    node_stack.push(element)
-                    result = dfs_helper(element, visited_nodes)
-                    if result:
-                        # print("ENDE::::: ", [direction] + result)
-                        return [direction] + result
+
+                    # Erstelle eine neue Liste mit den aktuellen Richtungen und füge die neue Richtung hinzu
+                    next_direction = dfs_helper((state, current_directions + [direction]), visited_nodes)
+                    if next_direction is not None:
+                        return next_direction
 
     # [State(x,y), direction, value], start,state
-    return dfs_helper((problem.getStartState(), '', 0), {problem.getStartState()})
+    return dfs_helper((problem.getStartState(), []), set([problem.getStartState()]))
+
 
 
 def breadthFirstSearch(problem: SearchProblem):

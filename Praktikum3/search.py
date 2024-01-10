@@ -91,26 +91,24 @@ def depthFirstSearch(problem: SearchProblem):
     """
     "*** YOUR CODE HERE ***"
 
-    def dfs_helper(current_node, visited_nodes):
+    def dfs_helper(current, visited_nodes):
         node_stack = util.Stack()
-        node_stack.push(current_node)
+        node_stack.push(current)
 
         while not node_stack.isEmpty():
-            next_field = node_stack.pop()
-            next_state = next_field[0]
-            next_directions = next_field[1]
+            current_node = node_stack.pop()
+            current_state, current_directions = current_node
 
-            if problem.isGoalState(next_state):
-                return next_directions
+            if problem.isGoalState(current_state):
+                return current_directions
 
-            successor = problem.getSuccessors(next_state)
-            for element in reversed(successor):
-                state, direction, _ = element
-                if state not in visited_nodes:
-                    visited_nodes.add(state)
+            for successor in reversed(problem.getSuccessors(current_state)):
+                next_state, next_direction, _ = successor
+                if next_state not in visited_nodes:
+                    visited_nodes.add(next_state)
 
                     # Erstelle eine neue Liste mit den aktuellen Richtungen und füge die neue Richtung hinzu
-                    next_direction = dfs_helper((state, next_directions + [direction]), visited_nodes)
+                    next_direction = dfs_helper((next_state, current_directions + [next_direction]), visited_nodes)
                     if next_direction is not None:
                         return next_direction
 
@@ -122,7 +120,29 @@ def depthFirstSearch(problem: SearchProblem):
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    node_queue = util.Queue()
+    node_queue.push((problem.getStartState(), []))
+
+    visited_nodes = set()
+
+    while not node_queue.isEmpty():
+        current_node = node_queue.pop()
+        current_state, current_directions = current_node
+
+        if problem.isGoalState(current_state):
+            return current_directions
+
+        if current_state not in visited_nodes:
+            visited_nodes.add(current_state)
+
+            for successor in problem.getSuccessors(current_state):
+                next_state, next_direction, _ = successor
+                next_directions = current_directions + [next_direction]
+                next_node = (next_state, next_directions)
+
+                node_queue.push(next_node)
+
+
 
 
 def uniformCostSearch(problem: SearchProblem):

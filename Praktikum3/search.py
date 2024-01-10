@@ -115,7 +115,7 @@ def depthFirstSearch(problem: SearchProblem):
                         return next_direction
 
     # [State(x,y), direction, value], start,state
-    return dfs_helper((problem.getStartState(), []), set([problem.getStartState()]))
+    return dfs_helper((problem.getStartState(), []), {problem.getStartState()})
 
 
 

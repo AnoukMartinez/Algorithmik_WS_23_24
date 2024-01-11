@@ -19,6 +19,7 @@ Pacman agents (in searchAgents.py).
 
 import util
 
+
 class SearchProblem:
     """
     This class outlines the structure of a search problem, but doesn't implement
@@ -70,7 +71,8 @@ def tinyMazeSearch(problem):
     from game import Directions
     s = Directions.SOUTH
     w = Directions.WEST
-    return  [s, s, w, s, w, w, s, w]
+    return [s, s, w, s, w, w, s, w]
+
 
 def depthFirstSearch(problem: SearchProblem):
     """
@@ -81,23 +83,69 @@ def depthFirstSearch(problem: SearchProblem):
 
     To get started, you might want to try some of these simple commands to
     understand the search problem that is being passed in:
+    """
+    "*** YOUR CODE HERE ***"
 
     print("Start:", problem.getStartState())
     print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
-    """
-    "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    perimeter = util.Stack()
+    visited = set()
+
+    perimeter.push((problem.getStartState(), []))
+
+    while not perimeter.isEmpty():
+        current_node, action_list = perimeter.pop()
+
+        if problem.isGoalState(current_node):
+            # print(action_list)
+            return action_list
+
+        if current_node not in visited:
+            for successor, action, cost in problem.getSuccessors(current_node):
+                if successor not in visited:
+                    next_action = action_list + [action]
+                    perimeter.push((successor, next_action))
+            visited.add(current_node)
+
+    return []
+
 
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    print("Start:", problem.getStartState())
+    print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+    print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+
+    perimeter = util.Queue()
+    visited = set()
+
+    perimeter.push((problem.getStartState(), []))
+
+    while not perimeter.isEmpty():
+        current_node, action_list = perimeter.pop()
+
+        if problem.isGoalState(current_node):
+            # print(action_list)
+            return action_list
+
+        for successor, action, cost in problem.getSuccessors(current_node):
+            if successor not in visited:
+                next_action = action_list + [action]
+                perimeter.push((successor, next_action))
+                visited.add(current_node)
+
+    return []
+
 
 def uniformCostSearch(problem: SearchProblem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
     util.raiseNotDefined()
+
 
 def nullHeuristic(state, problem=None):
     """
@@ -105,6 +153,7 @@ def nullHeuristic(state, problem=None):
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
     return 0
+
 
 def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""

@@ -150,43 +150,26 @@ class AVLTree:
             if node is not None:
                 searched_nodes += 1
 
-                # Wenn das aktuelle Teilwort mit dem gegebenen 'word' beginnt, das Wort hinzufügen
+                # Wenn das aktuelle Teilwort mit dem gegebenen 'word' beginnt
                 if node.key[0].startswith(word):
                     ngrams_dict[node.key[0]] = node.values[0]
-                    print("~~~~~~~~~~~~~~ NODE: ~~~~ ", node.key[0], " ~~~~ HINZUGEFÜGT ~~~~~~~~~~~~~~")
 
-                '''
-                if node.left_child is not None:
-                    if node.left_child.key[0].startswith(word):
-                        print("==== printer  links: ", node.left_child.key[0], " start with: ",
-                              node.left_child.key[0].startswith(word), " ====")
-                    else:
-                        print("printer  links: ", node.left_child.key[0], " start with: ",
-                              node.left_child.key[0].startswith(word))
-                if node.right_child is not None:
-                    if node.right_child.key[0].startswith(word):
-                        print("==== printer rechts: ", node.right_child.key[0], " start with: ",
-                              node.right_child.key[0].startswith(word), " ====")
-                    else:
-                        print("printer rechts: ", node.right_child.key[0], " start with: ",
-                              node.right_child.key[0].startswith(word))
+                    # Nur in den Teilbaum absteigen, wenn das Wort in der aktuellen Node gefunden wurde
+                    if node.left_child is not None:
+                        search_subtree(node.left_child)
+                    if node.right_child is not None:
+                        search_subtree(node.right_child)
 
-                '''
+                # Entscheide, in welchen Teilbaum abgestiegen wird, wenn das Wort nicht in der aktuellen Node ist
+                elif word < node.key[0]:
+                    # Das gesuchte 'word' ist kleiner, also nach links gehen
+                    search_subtree(node.left_child)
+                elif word >= node.key[0]:
+                    # Das gesuchte 'word' ist größer, also nach rechts gehen
+                    search_subtree(node.right_child)
 
                 # Entkommentiere um den ersten Key des jeweiligen linken und rechten Teilbaum zu sehen, wenn vorhanden
-                #  self.print_node_info(node, word)
-
-                # Entscheide, in welchen Teilbaum abgestiegen wird
-                if node.left_child is not None and (word < node.key[0] or node.left_child.key[0].startswith(word)):
-                    # Das aktuelle Teilwort des Knotens ist größer als das gesuchte 'word' oder
-                    # der linke Teilbaum startet mit dem gesuchten 'word', also nach links gehen
-                    print("~~~~~~~~~~~~~~ GEHE IN  links: ", node.left_child.key[0], " ~~~~~~~~~~~~~~")
-                    search_subtree(node.left_child)
-                elif node.right_child is not None and (word > node.key[0] or node.right_child.key[0].startswith(word)):
-                    # Das aktuelle Teilwort des Knotens ist kleiner als das gesuchte 'word' oder
-                    # der rechte Teilbaum startet mit dem gesuchten 'word', also nach rechts gehen
-                    print("~~~~~~~~~~~~~~ GEHE IN rechts: ", node.right_child.key[0], " ~~~~~~~~~~~~~~")
-                    search_subtree(node.right_child)
+            #   self.print_node_info(node, word)
 
         # Die Suche im AVL-Teilbaum starten
         search_subtree(self.root)
@@ -213,6 +196,7 @@ class AVLTree:
             else:
                 print("printer rechts: ", node.right_child.key[0], " start with: ",
                       node.right_child.key[0].startswith(word))
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
     def delete_key(self, key):
         return self.delete_node(self.find(key))

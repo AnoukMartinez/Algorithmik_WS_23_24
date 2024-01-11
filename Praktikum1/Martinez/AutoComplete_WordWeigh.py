@@ -2,6 +2,7 @@ import csv
 from AVLTree_WordWeigh import AVLTree
 import os
 
+
 class AutocompleteNgrams:
     def __init__(self):
         self.array = [AVLTree() for _ in range(26)]
@@ -32,9 +33,9 @@ class AutocompleteNgrams:
         letter_in_array = ord(first_letter) - 97
         found_node = self.array[letter_in_array].find(ngram)
         if found_node is None:
-            return None # ngram nicht gefunden
+            return None  # ngram nicht gefunden
         else:
-            return found_node.value # ngram gefunden, frequenz zurückgeben
+            return found_node.value  # ngram gefunden, frequenz zurückgeben
 
     def get_k_possible_suggestions(self, input_string: str, k: int):
         first_letter = input_string[0]
@@ -43,15 +44,15 @@ class AutocompleteNgrams:
         ngrams_array, searched_nodes = tree.find_most_likely_ngrams(input_string, tree.root)
 
         ngrams_array = filter(lambda x: x[0] != input_string, ngrams_array)
-        ngrams_array = sorted(ngrams_array, key=lambda x:int(x[1]), reverse=True)
+        ngrams_array = sorted(ngrams_array, key=lambda x: int(x[1]), reverse=True)
 
         return ngrams_array[:k], searched_nodes
 
-#autocomplete = AutocompleteNgrams()
-#autocomplete.read_csv_file("1_gram.csv")
-#print(autocomplete.get("dimwit"))
-#print(autocomplete.get("midwit"))
+# autocomplete = AutocompleteNgrams()
+# autocomplete.read_csv_file("1_gram.csv")
+# print(autocomplete.get("dimwit"))
+# print(autocomplete.get("midwit"))
 
-#suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 10)
-#print(suggestions)
-#print(searched_nodes)
+# suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 10)
+# print(suggestions)
+# print(searched_nodes)

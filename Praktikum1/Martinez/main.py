@@ -26,15 +26,38 @@ def autocomplete():
     print(autocomplete.get("dimwit"))
     print(autocomplete.get("midwit"))
 
-    suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 10)
+    suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("tom", 200)
     print(suggestions)
     print(searched_nodes)
+    print("ANZAHL DER EINTRÄGE IN DER LISTE mit k 200: ", len(suggestions))
+
+
+def autocomplete2():
+    print("======== Start autocomplete =========")
+    autocomplete = AutocompleteNgrams()
+    autocomplete.read_csv_file("4_gram.csv")
+
+    suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("no", 66000)
+    print(suggestions)
+    print(searched_nodes)
+    print("ANZAHL DER EINTRÄGE IN DER LISTE mit k 66000: ", len(suggestions))
+
+
+def autocomplete3():
+    print("======== Start autocomplete =========")
+    autocomplete = AutocompleteNgrams()
+    autocomplete.read_csv_file("4_gram.csv")
+
+    suggestions, searched_nodes = autocomplete.get_k_possible_suggestions("i quic", 4)
+    print(suggestions)
+    print(searched_nodes)
+    print("ANZAHL DER EINTRÄGE IN DER LISTE mit k 66000: ", len(suggestions))
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # linked_hash()
     # library_hash()
-    autocomplete()
+    autocomplete3()
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

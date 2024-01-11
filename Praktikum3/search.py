@@ -106,14 +106,14 @@ def depthFirstSearch(problem: SearchProblem):
         if current_state not in visited_nodes:
             visited_nodes.add(current_state)
 
-            for successor in reversed(problem.getSuccessors(current_state)):
+            for successor in problem.getSuccessors(current_state):
                 next_state, next_direction, _ = successor
                 if next_state not in visited_nodes:
                     next_directions = current_directions + [next_direction]
                     next_node = (next_state, next_directions)
                     node_stack.push(next_node)
 
-    return None
+    return []
 
 
 

@@ -144,6 +144,7 @@ def breadthFirstSearch(problem: SearchProblem):
                 node_queue.push(next_node)
                 visited_nodes.add(next_state)
 
+    return []
 
 
 def uniformCostSearch(problem: SearchProblem):

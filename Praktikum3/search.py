@@ -16,7 +16,6 @@
 In search.py, you will implement generic search algorithms which are called by
 Pacman agents (in searchAgents.py).
 """
-from prompt_toolkit.search import SearchState
 
 import util
 
@@ -117,7 +116,6 @@ def depthFirstSearch(problem: SearchProblem):
     return []
 
 
-
 def breadthFirstSearch(problem: SearchProblem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
@@ -125,16 +123,14 @@ def breadthFirstSearch(problem: SearchProblem):
     node_queue.push((problem.getStartState(), []))
 
     visited_nodes = set()
+    visited_nodes.add(problem.getStartState())
 
     while not node_queue.isEmpty():
         current_node = node_queue.pop()
         current_state, current_directions = current_node
-        visited_nodes.add(current_state)
 
         if problem.isGoalState(current_state):
             return current_directions
-
-
 
         for successor in problem.getSuccessors(current_state):
             next_state, next_direction, _ = successor

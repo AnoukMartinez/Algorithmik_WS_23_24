@@ -104,7 +104,6 @@ def depthFirstSearch(problem: SearchProblem):
             return current_directions
 
         if current_state not in visited_nodes:
-            visited_nodes.add(current_state)
 
             for successor in problem.getSuccessors(current_state):
                 next_state, next_direction, _ = successor
@@ -112,6 +111,8 @@ def depthFirstSearch(problem: SearchProblem):
                     next_directions = current_directions + [next_direction]
                     next_node = (next_state, next_directions)
                     node_stack.push(next_node)
+
+            visited_nodes.add(current_state)
 
     return []
 
@@ -128,20 +129,20 @@ def breadthFirstSearch(problem: SearchProblem):
     while not node_queue.isEmpty():
         current_node = node_queue.pop()
         current_state, current_directions = current_node
+        visited_nodes.add(current_state)
 
         if problem.isGoalState(current_state):
             return current_directions
 
-        if current_state not in visited_nodes:
-            visited_nodes.add(current_state)
 
-            for successor in problem.getSuccessors(current_state):
-                next_state, next_direction, _ = successor
-                next_directions = current_directions + [next_direction]
-                next_node = (next_state, next_directions)
 
+        for successor in problem.getSuccessors(current_state):
+            next_state, next_direction, _ = successor
+            next_directions = current_directions + [next_direction]
+            next_node = (next_state, next_directions)
+            if next_state not in visited_nodes:
                 node_queue.push(next_node)
-
+                visited_nodes.add(next_state)
 
 
 
